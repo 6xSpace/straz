@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://q2kj3eopv2jx"]
+
+[ext_resource type="Texture2D" uid="uid://c31r3kaxo3qqm" path="res://asstets/placeholder_bg.png" id="1_wtcfe"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="bg" type="Sprite2D" parent="."]
+texture = ExtResource("1_wtcfe")

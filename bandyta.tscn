@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cxbhvumeoqepi"]
+
+[ext_resource type="Texture2D" uid="uid://eufqg5oor8i8" path="res://asstets/placeholder_bandyta.png" id="1_wbk82"]
+
+[node name="Area2D" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_wbk82")

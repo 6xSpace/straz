@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://ba06gmpah5y0q"]
+
+[ext_resource type="Texture2D" uid="uid://djytxvjnvgncw" path="res://asstets/placeholder_domek.png" id="1_seeua"]
+
+[node name="Area2D" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_seeua")

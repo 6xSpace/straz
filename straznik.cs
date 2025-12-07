@@ -30,6 +30,14 @@ public partial class straznik : Node2D
 			{
 				GD.Print("Lewy klik!");
 				// tutaj zrób co chcesz
+				
+				//DOBIERANIE SIE DO BOARDA
+				var tablica = GetNode<Board>("/root/Node2D/@Node2D@2");
+				GD.Print(tablica);
+				tablica.wypisz();
+				/////////////////////////////////////////////////////////////////////
+				
+				
 				if (klikniety == false){
 					klikniety = true;
 					var sprite = GetNode<Sprite2D>("Sprite2D");

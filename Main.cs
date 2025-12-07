@@ -8,6 +8,7 @@ public partial class Main : Node2D
 	{
 		GD.Print("chuj");
 		var table = new Board();
+		AddChild(table);
 		table.dodajDomek(1, 1);
 		table.wypisz();
 		table.generuj(this);
@@ -21,5 +22,9 @@ public partial class Main : Node2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+	}
+	
+	public void wypisz(){
+		GD.Print("chuj");
 	}
 }

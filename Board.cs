@@ -3,6 +3,10 @@ using System;
 
 public partial class Board : Node2D
 {
+
+	
+
+
 	int[][] table = 
 	//[[0,0,0,0,0,0,0,0,0,0,],
 	//[0,0,0,0,0,0,0,0,0,0,],
@@ -14,27 +18,32 @@ public partial class Board : Node2D
 	//[0,0,0,0,0,0,0,0,0,0,],
 	//[0,0,0,0,0,0,0,0,0,0,],
 	//[0,0,0,0,0,0,0,0,0,0,]] ;
-	[[1,1,1,1,1,1,1,1,1,1,],
-	[1,0,0,0,0,0,0,0,0,1,],
-	[1,0,0,0,0,0,0,0,0,1,],
-	[1,0,0,0,0,0,0,0,0,1,],
-	[1,0,0,0,0,0,3,0,0,1,],
-	[1,0,0,0,0,0,0,0,0,1,],
-	[1,0,0,0,0,2,0,0,0,1,],
-	[1,0,0,0,0,0,0,0,0,1,],
-	[1,0,0,0,0,0,0,0,0,1,],
-	[1,1,1,1,1,1,1,1,1,1,]] ;
-	//0-puste, 1-domek, 2-straznik, 3-bandyta
+	[[3001,3001,3001,3001,3001,3001,3001,3001,3001,3001,],
+	[3001,0,0,0,0,0,0,0,0,3001,],
+	[3001,0,0,0,0,0,0,0,0,3001,],
+	[3001,0,0,0,0,0,0,0,0,3001,],
+	[3001,0,0,0,0,0,3003,0,0,3001,],
+	[3001,0,0,0,0,0,0,0,0,3001,],
+	[3001,0,0,0,0,3002,0,0,0,3001,],
+	[3001,0,0,0,0,0,0,0,0,3001,],
+	[3001,0,0,0,0,0,0,0,0,3001,],
+	[3001,3001,3001,3001,3001,3001,3001,3001,3001,3001,]] ;
+	//0-puste, 3001-domek, 3002-straznik, 3003-bandyta
 	
 	public void dodajDomek(int x, int y){
-		this.table[y][x] = 1;
+		this.table[y][x] = 3001;
 		//GD.Print(this.table);
+		
+		//GD.Print("Moja ścieżka: " + GetPath());              // ścieżka tego węzła
+	//if (GetParent() != null)
+		//GD.Print("Parent: " + GetParent().GetPath() + " typ: " + GetParent().GetType().Name);
+
 	}
 	public void dodajStraznika(int x, int y){
-		this.table[y][x] = 2;
+		this.table[y][x] = 3002;
 	}
 	public void dodajBandyte(int x, int y){
-		this.table[y][x] = 3;
+		this.table[y][x] = 3003;
 	}
 	
 	public void wypisz(){
@@ -48,11 +57,15 @@ public partial class Board : Node2D
 		}
 	}
 	
+	public int[][] getter(){
+		return table;
+	}
+	
 	public void generuj(dynamic node){
 		for (int i = 0; i<this.table.Length; i++)
 		{
 			for (int y = 0; y<this.table[i].Length; y++){
-				if (this.table[i][y] == 1){
+				if (this.table[i][y] == 3001){
 					GD.Print(node);
 					//var domek = GetNode<Area2D>("domek");
 					var domek1 = GD.Load<PackedScene>("res://domek.tscn");
@@ -69,7 +82,7 @@ public partial class Board : Node2D
 					GD.Print(domeczek);
 					domeczek.Position = new Vector2(30*i, 30*y);
 					
-				}else if (this.table[i][y] == 2){
+				}else if (this.table[i][y] == 3002){
 					GD.Print(node);
 					var domek1 = GD.Load<PackedScene>("res://straznik.tscn");
 					var domeczek = domek1.Instantiate<Node2D>();
@@ -77,7 +90,7 @@ public partial class Board : Node2D
 					GD.Print(domeczek);
 					domeczek.Position = new Vector2(30*i, 30*y);
 					
-				}else if (this.table[i][y] == 3){
+				}else if (this.table[i][y] == 3003){
 					GD.Print(node);
 					var domek1 = GD.Load<PackedScene>("res://bandyta.tscn");
 					var domeczek = domek1.Instantiate<Node2D>();

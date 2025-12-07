@@ -1,8 +1,23 @@
-[gd_scene load_steps=2 format=3 uid="uid://yetdqrqyj2de"]
+[gd_scene load_steps=5 format=3 uid="uid://yetdqrqyj2de"]
 
+[ext_resource type="Script" uid="uid://dfvjraqtaempt" path="res://straznik.cs" id="1_ovcf6"]
 [ext_resource type="Texture2D" uid="uid://uvw5mgjwudej" path="res://asstets/placeholder_straznik.png" id="1_xxejd"]
+[ext_resource type="Script" uid="uid://tsq4ck8i5rif" path="res://Area2d.cs" id="3_hudal"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xxejd"]
+size = Vector2(30, 30)
 
 [node name="Area2D" type="Node2D"]
+script = ExtResource("1_ovcf6")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_xxejd")
+
+[node name="Area2D" type="Area2D" parent="."]
+script = ExtResource("3_hudal")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_xxejd")
+
+[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]

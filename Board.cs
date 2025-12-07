@@ -85,6 +85,14 @@ public partial class Board : Node2D
 					GD.Print(domeczek);
 					domeczek.Position = new Vector2(30*i, 30*y);
 					
+				} else if (this.table[i][y] == 0){
+					GD.Print(node);
+					var domek1 = GD.Load<PackedScene>("res://puste_pole.tscn");
+					var domeczek = domek1.Instantiate<Node2D>();
+					node.AddChild(domeczek);
+					GD.Print(domeczek);
+					domeczek.Position = new Vector2(30*i, 30*y);
+					
 				}
 			}
 			

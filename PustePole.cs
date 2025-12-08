@@ -39,6 +39,16 @@ public partial class PustePole : Node2D
 			szukaj(tablica.tablicaSciezki, i, y, tablica.table[i][y]);
 			GD.Print(string.Join(", ", sekwencja));
 			
+			
+			//for (int i = 0; i<this.table.Length; i++)
+			//{
+					//for (int y = 0; y<this.table[i].Length; y++){
+						//if (tablica.table[i][y] == 0){
+							//
+						//}
+					//}
+						//
+				//}
 			foreach (var item in sekwencja){
 				//GD.Print(item);
 				var pole = GetNode<Sprite2D>("/root/Node2D/"+item+"/Sprite2D");
@@ -63,7 +73,7 @@ public partial class PustePole : Node2D
 			sekwencja.Add("pole"+pole_i+temp);
 			szukaj(obszar, pole_i, pole_y-1, licznik-1);
 		} else if (licznik >= 0 && obszar[pole_i][pole_y+1] == licznik-1){
-			int temp = pole_i+1;
+			int temp = pole_y+1;
 			sekwencja.Add("pole"+pole_i+temp);
 			szukaj(obszar, pole_i, pole_y+1, licznik-1);
 		}
@@ -75,12 +85,12 @@ public partial class PustePole : Node2D
 		var sprite = GetNode<Sprite2D>("Sprite2D");
 		//var obrazek = GD.Load<Texture2D>("res://asstets/puste_klik.png");
 		sprite.Texture = null;
-		foreach (var item in sekwencja){
-		//GD.Print(item);
-			var pole = GetNode<Sprite2D>("/root/Node2D/"+item+"/Sprite2D");
-			//GD.Print(pole);
-			pole.Texture = null;
-		}
+		//foreach (var item in sekwencja){
+		////GD.Print(item);
+			//var pole = GetNode<Sprite2D>("/root/Node2D/"+item+"/Sprite2D");
+			////GD.Print(pole);
+			//pole.Texture = null;
+		//}
 		sekwencja.Clear();
 	}
 }

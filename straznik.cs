@@ -36,9 +36,27 @@ public partial class straznik : Node2D
 				GD.Print(tablica);
 				tablica.wypisz();
 				
-				int[][] doZwrocenia = this.pathfinding(tablica.getter());
-				tablica.tablicaSciezki = doZwrocenia;
+				//object kopia = tablica.table.Clone();
+				//tablica.tablicaSciezki = tablica.table;
+				
+				//TO JEST ULTRA KURA GŁUPIE, JEBAĆ TYPY REFERENCYJNE ISTG
+				///////////////////////////////////////////////////////////
+				for (int pole_i = 0; pole_i<tablica.table.Length; pole_i++)
+				{
+					for (int pole_y = 0; pole_y<tablica.table[pole_i].Length; pole_y++){
+						//GD.Print(tablica.table[pole_i][pole_y]);
+						tablica.tablicaSciezki[pole_i][pole_y] = tablica.table[pole_i][pole_y];
+					}
+							
+				}
+				//int[][] doZwrocenia = this.pathfinding(tablica.tablicaSciezki);
+				//tablica.tablicaSciezki = doZwrocenia;
+				//tablica.szukacSciezki = true;
+				//tablica.wypisz();
+				
+				this.pathfinding(tablica.tablicaSciezki);
 				tablica.szukacSciezki = true;
+				tablica.wypisz();
 				/////////////////////////////////////////////////////////////////////
 				
 				

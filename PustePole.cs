@@ -19,10 +19,24 @@ public partial class PustePole : Node2D
 		//var node2 = node;
 		var sprite = GetNode<Sprite2D>("Sprite2D");
 		var obrazek = GD.Load<Texture2D>("res://asstets/puste_klik.png");
-		sprite.Texture = obrazek;
+		
 		
 		var tablica = GetNode<Board>("/root/Node2D/@Node2D@2");
 		//GD.Print(tablica);
+		
+		for (int pole_i = 0; pole_i<tablica.table.Length; pole_i++)
+			{
+				for (int pole_y = 0; pole_y<tablica.table[pole_i].Length; pole_y++){
+					//GD.Print(tablica.table[pole_i][pole_y]);
+					if (tablica.table[pole_i][pole_y] == 0){
+						var pole = GetNode<Sprite2D>("/root/Node2D/pole"+pole_i+pole_y+"/Sprite2D");
+						
+						pole.Texture = null;
+					}
+				}
+						
+			}
+		
 		if (tablica.szukacSciezki){
 			string temp = this.Name;
 			char iii = temp[4];
@@ -35,20 +49,17 @@ public partial class PustePole : Node2D
 			int y = Convert.ToInt32(yy);
 			//GD.Print(y);
 			//GD.Print(tablica.table[i][y]);
+			
+			
+			
+			
+			
 			sekwencja.Add(this.Name);
-			szukaj(tablica.tablicaSciezki, i, y, tablica.table[i][y]);
+			szukaj(tablica.tablicaSciezki, i, y, tablica.tablicaSciezki[i][y]);
 			GD.Print(string.Join(", ", sekwencja));
 			
 			
-			//for (int i = 0; i<this.table.Length; i++)
-			//{
-					//for (int y = 0; y<this.table[i].Length; y++){
-						//if (tablica.table[i][y] == 0){
-							//
-						//}
-					//}
-						//
-				//}
+			
 			foreach (var item in sekwencja){
 				//GD.Print(item);
 				var pole = GetNode<Sprite2D>("/root/Node2D/"+item+"/Sprite2D");
@@ -56,6 +67,7 @@ public partial class PustePole : Node2D
 				pole.Texture = obrazek;
 			}
 		}
+		sprite.Texture = obrazek;
 	}
 	
 	public void szukaj(dynamic obszar, int pole_i, int pole_y, int licznik){
@@ -84,7 +96,7 @@ public partial class PustePole : Node2D
 	public void _on_area_2d_mouse_exited(){
 		var sprite = GetNode<Sprite2D>("Sprite2D");
 		//var obrazek = GD.Load<Texture2D>("res://asstets/puste_klik.png");
-		sprite.Texture = null;
+		//sprite.Texture = null;
 		//foreach (var item in sekwencja){
 		////GD.Print(item);
 			//var pole = GetNode<Sprite2D>("/root/Node2D/"+item+"/Sprite2D");

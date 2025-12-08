@@ -54,7 +54,7 @@ public partial class straznik : Node2D
 			}
 		}
 	}
-	public void pathfinding(dynamic obszar){
+	public int[][] pathfinding(dynamic obszar){
 		GD.Print(this.Name);
 		string temp = this.Name;
 		char iii = temp[4];
@@ -81,6 +81,8 @@ public partial class straznik : Node2D
 			GD.Print("", string.Join(", ", chuj));
 			
 		}
+		
+		return obszar;
 	}
 	public static void malyPathfinding(dynamic obszar, int pole_i, int pole_y, int licznik){
 		if (obszar[pole_i+1][pole_y] == 0 || (obszar[pole_i+1][pole_y] > licznik && obszar[pole_i+1][pole_y] < 3000)){

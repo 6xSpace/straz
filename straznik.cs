@@ -67,9 +67,9 @@ public partial class straznik : Node2D
 		int y = Convert.ToInt32(yy);
 		GD.Print(y);
 		malyPathfinding(obszar, i, y, 1);
-		malyPathfinding(obszar, i, y, 1);
-		malyPathfinding(obszar, i, y, 1);
-		malyPathfinding(obszar, i, y, 1);
+		//malyPathfinding(obszar, i, y, 1);
+		//malyPathfinding(obszar, i, y, 1);
+		//malyPathfinding(obszar, i, y, 1);
 		
 		
 		
@@ -82,20 +82,20 @@ public partial class straznik : Node2D
 			
 		}
 	}
-	public static void malyPathfinding(dynamic obszar, int pole_i, int pole_y, int licznik, string kierunek){
-		if (obszar[pole_i+1][pole_y] == 0){
+	public static void malyPathfinding(dynamic obszar, int pole_i, int pole_y, int licznik){
+		if (obszar[pole_i+1][pole_y] == 0 || (obszar[pole_i+1][pole_y] > licznik && obszar[pole_i+1][pole_y] < 3000)){
 			obszar[pole_i+1][pole_y] = licznik;
 			//malyPathfinding(obszar, pole_i+1, pole_y, licznik+1);
 		} 
-		if (obszar[pole_i-1][pole_y] == 0){
+		if (obszar[pole_i-1][pole_y] == 0 || (obszar[pole_i-1][pole_y] > licznik && obszar[pole_i-1][pole_y] < 3000)){
 			obszar[pole_i-1][pole_y] = licznik;
 			//malyPathfinding(obszar, pole_i-1, pole_y, licznik+1);
 		} 
-		if (obszar[pole_i][pole_y+1] == 0){
+		if (obszar[pole_i][pole_y+1] == 0 || (obszar[pole_i][pole_y+1] > licznik && obszar[pole_i][pole_y+1] < 3000)){
 			obszar[pole_i][pole_y+1] = licznik;
 			//malyPathfinding(obszar, pole_i, pole_y+1, licznik+1);
 		} 
-		if (obszar[pole_i][pole_y-1] == 0){
+		if (obszar[pole_i][pole_y-1] == 0 || (obszar[pole_i][pole_y-1] > licznik && obszar[pole_i][pole_y-1] < 3000)){
 			obszar[pole_i][pole_y-1] = licznik;
 			//malyPathfinding(obszar, pole_i, pole_y-1, licznik+1);
 		}

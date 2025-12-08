@@ -35,6 +35,8 @@ public partial class straznik : Node2D
 				var tablica = GetNode<Board>("/root/Node2D/@Node2D@2");
 				GD.Print(tablica);
 				tablica.wypisz();
+				
+				this.pathfinding(tablica.getter());
 				/////////////////////////////////////////////////////////////////////
 				
 				
@@ -50,6 +52,66 @@ public partial class straznik : Node2D
 					sprite.Texture = obrazek;
 				}
 			}
+		}
+	}
+	public void pathfinding(dynamic obszar){
+		GD.Print(this.Name);
+		string temp = this.Name;
+		char iii = temp[4];
+		string ii = Convert.ToString(iii);
+		int i = Convert.ToInt32(ii);
+		GD.Print(iii);
+		GD.Print(i);
+		char yyy = temp[5];
+		string yy = Convert.ToString(yyy);
+		int y = Convert.ToInt32(yy);
+		GD.Print(y);
+		malyPathfinding(obszar, i, y, 1, "dol");
+		malyPathfinding(obszar, i, y, 1, "gora");
+		malyPathfinding(obszar, i, y, 1, "prawo");
+		malyPathfinding(obszar, i, y, 1, "lewo");
+		
+		
+		
+		foreach(var chuj in obszar)
+		{
+			//foreach(var y in i){
+				//GD.Print(y.ToString());
+			//}
+			GD.Print("", string.Join(", ", chuj));
+			
+		}
+	}
+	public static void malyPathfinding(dynamic obszar, int pole_i, int pole_y, int licznik, string kierunek){
+		if (obszar[pole_i+1][pole_y] == 0){
+			obszar[pole_i+1][pole_y] = licznik;
+			//malyPathfinding(obszar, pole_i+1, pole_y, licznik+1);
+		} 
+		if (obszar[pole_i-1][pole_y] == 0){
+			obszar[pole_i-1][pole_y] = licznik;
+			//malyPathfinding(obszar, pole_i-1, pole_y, licznik+1);
+		} 
+		if (obszar[pole_i][pole_y+1] == 0){
+			obszar[pole_i][pole_y+1] = licznik;
+			//malyPathfinding(obszar, pole_i, pole_y+1, licznik+1);
+		} 
+		if (obszar[pole_i][pole_y-1] == 0){
+			obszar[pole_i][pole_y-1] = licznik;
+			//malyPathfinding(obszar, pole_i, pole_y-1, licznik+1);
+		}
+		
+		
+		if (obszar[pole_i+1][pole_y] == licznik && kierunek == "dol"){
+			malyPathfinding(obszar, pole_i+1, pole_y, licznik+1, "dol");
+		}
+		if (obszar[pole_i-1][pole_y] == licznik && kierunek == "gora"){
+			malyPathfinding(obszar, pole_i-1, pole_y, licznik+1, "gora");
+		}
+		if (obszar[pole_i][pole_y-1] == licznik && kierunek == "lewo"){
+			malyPathfinding(obszar, pole_i, pole_y-1, licznik+1, "lewo");
+		}
+		if (obszar[pole_i][pole_y+1] == licznik && kierunek == "prawo"){
+			malyPathfinding(obszar, pole_i, pole_y+1, licznik+1, "prawo");
 		}
 	}
 }

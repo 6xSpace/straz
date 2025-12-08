@@ -78,6 +78,7 @@ public partial class Board : Node2D
 					//var domek = new Sprite2D();
 					//var obrazek = GD.Load<Texture2D>("res://asstets/placeholder_domek.png");
 					//domek.Texture = obrazek;
+					domeczek.Name = "pole"+i+y;
 					node.AddChild(domeczek);
 					GD.Print(domeczek);
 					domeczek.Position = new Vector2(30*i, 30*y);
@@ -86,6 +87,7 @@ public partial class Board : Node2D
 					GD.Print(node);
 					var domek1 = GD.Load<PackedScene>("res://straznik.tscn");
 					var domeczek = domek1.Instantiate<Node2D>();
+					domeczek.Name = "pole"+i+y;
 					node.AddChild(domeczek);
 					GD.Print(domeczek);
 					domeczek.Position = new Vector2(30*i, 30*y);
@@ -94,6 +96,7 @@ public partial class Board : Node2D
 					GD.Print(node);
 					var domek1 = GD.Load<PackedScene>("res://bandyta.tscn");
 					var domeczek = domek1.Instantiate<Node2D>();
+					domeczek.Name = "pole"+i+y;
 					node.AddChild(domeczek);
 					GD.Print(domeczek);
 					domeczek.Position = new Vector2(30*i, 30*y);
@@ -102,6 +105,7 @@ public partial class Board : Node2D
 					GD.Print(node);
 					var domek1 = GD.Load<PackedScene>("res://puste_pole.tscn");
 					var domeczek = domek1.Instantiate<Node2D>();
+					domeczek.Name = "pole"+i+y;
 					node.AddChild(domeczek);
 					GD.Print(domeczek);
 					domeczek.Position = new Vector2(30*i, 30*y);

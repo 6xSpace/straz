@@ -55,18 +55,20 @@ public partial class straznik : Node2D
 				//tablica.wypisz();
 				
 				this.pathfinding(tablica.tablicaSciezki);
-				tablica.szukacSciezki = true;
+				
 				tablica.wypisz();
 				/////////////////////////////////////////////////////////////////////
 				
 				
 				if (klikniety == false){
 					klikniety = true;
+					tablica.szukacSciezki = true;
 					var sprite = GetNode<Sprite2D>("Sprite2D");
 					var obrazek = GD.Load<Texture2D>("res://asstets/placeholder_straznik_klik.png");
 					sprite.Texture = obrazek;
 				} else {
 					klikniety = false;
+					tablica.szukacSciezki = false;
 					var sprite = GetNode<Sprite2D>("Sprite2D");
 					var obrazek = GD.Load<Texture2D>("res://asstets/placeholder_straznik.png");
 					sprite.Texture = obrazek;

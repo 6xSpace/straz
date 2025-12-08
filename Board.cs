@@ -7,7 +7,7 @@ public partial class Board : Node2D
 	
 
 
-	int[][] table = 
+	public int[][] table = 
 	//[[0,0,0,0,0,0,0,0,0,0,],
 	//[0,0,0,0,0,0,0,0,0,0,],
 	//[0,0,0,0,0,0,0,0,0,0,],
@@ -30,7 +30,7 @@ public partial class Board : Node2D
 	[3001,3001,3001,3001,3001,3001,3001,3001,3001,3001,]] ;
 	//0-puste, 3001-domek, 3002-straznik, 3003-bandyta
 	
-	int[][] tablicaSciezki = 
+	public int[][] tablicaSciezki = 
 	[[0,0,0,0,0,0,0,0,0,0,],
 	[0,0,0,0,0,0,0,0,0,0,],
 	[0,0,0,0,0,0,0,0,0,0,],
@@ -41,6 +41,8 @@ public partial class Board : Node2D
 	[0,0,0,0,0,0,0,0,0,0,],
 	[0,0,0,0,0,0,0,0,0,0,],
 	[0,0,0,0,0,0,0,0,0,0,]] ;
+	
+	public bool szukacSciezki = false;
 	
 	public void dodajDomek(int x, int y){
 		this.table[y][x] = 3001;

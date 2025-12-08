@@ -36,7 +36,9 @@ public partial class straznik : Node2D
 				GD.Print(tablica);
 				tablica.wypisz();
 				
-				this.pathfinding(tablica.getter());
+				int[][] doZwrocenia = this.pathfinding(tablica.getter());
+				tablica.tablicaSciezki = doZwrocenia;
+				tablica.szukacSciezki = true;
 				/////////////////////////////////////////////////////////////////////
 				
 				

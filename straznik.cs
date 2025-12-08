@@ -66,10 +66,10 @@ public partial class straznik : Node2D
 		string yy = Convert.ToString(yyy);
 		int y = Convert.ToInt32(yy);
 		GD.Print(y);
-		malyPathfinding(obszar, i, y, 1, "dol");
-		malyPathfinding(obszar, i, y, 1, "gora");
-		malyPathfinding(obszar, i, y, 1, "prawo");
-		malyPathfinding(obszar, i, y, 1, "lewo");
+		malyPathfinding(obszar, i, y, 1);
+		malyPathfinding(obszar, i, y, 1);
+		malyPathfinding(obszar, i, y, 1);
+		malyPathfinding(obszar, i, y, 1);
 		
 		
 		
@@ -101,17 +101,17 @@ public partial class straznik : Node2D
 		}
 		
 		
-		if (obszar[pole_i+1][pole_y] == licznik && kierunek == "dol"){
-			malyPathfinding(obszar, pole_i+1, pole_y, licznik+1, "dol");
+		if (obszar[pole_i+1][pole_y] == licznik){
+			malyPathfinding(obszar, pole_i+1, pole_y, licznik+1);
 		}
-		if (obszar[pole_i-1][pole_y] == licznik && kierunek == "gora"){
-			malyPathfinding(obszar, pole_i-1, pole_y, licznik+1, "gora");
+		if (obszar[pole_i-1][pole_y] == licznik){
+			malyPathfinding(obszar, pole_i-1, pole_y, licznik+1);
 		}
-		if (obszar[pole_i][pole_y-1] == licznik && kierunek == "lewo"){
-			malyPathfinding(obszar, pole_i, pole_y-1, licznik+1, "lewo");
+		if (obszar[pole_i][pole_y-1] == licznik){
+			malyPathfinding(obszar, pole_i, pole_y-1, licznik+1);
 		}
-		if (obszar[pole_i][pole_y+1] == licznik && kierunek == "prawo"){
-			malyPathfinding(obszar, pole_i, pole_y+1, licznik+1, "prawo");
+		if (obszar[pole_i][pole_y+1] == licznik){
+			malyPathfinding(obszar, pole_i, pole_y+1, licznik+1);
 		}
 	}
 }

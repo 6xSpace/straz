@@ -1,8 +1,20 @@
-[gd_scene load_steps=2 format=3 uid="uid://cxbhvumeoqepi"]
+[gd_scene load_steps=4 format=3 uid="uid://cxbhvumeoqepi"]
 
+[ext_resource type="Script" uid="uid://bif6efy65hamq" path="res://Bandyta.cs" id="1_5a6v5"]
 [ext_resource type="Texture2D" uid="uid://eufqg5oor8i8" path="res://asstets/placeholder_bandyta.png" id="1_wbk82"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wbk82"]
+size = Vector2(30, 30)
+
 [node name="Area2D" type="Node2D"]
+script = ExtResource("1_5a6v5")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_wbk82")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_wbk82")
+
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]

@@ -15,6 +15,20 @@ public partial class straznik : Node2D
 	}
 	
 	public void _on_area_2d_mouse_entered(){
+		
+		var tablica = GetNode<Board>("/root/Node2D/tableNode");
+		for (int pole_i = 0; pole_i<tablica.table.Length; pole_i++)
+			{
+				for (int pole_y = 0; pole_y<tablica.table[pole_i].Length; pole_y++){
+					//GD.Print(tablica.table[pole_i][pole_y]);
+					if (tablica.table[pole_i][pole_y] == 0){
+						var pole = GetNode<Sprite2D>("/root/Node2D/pole"+pole_i+pole_y+"/Sprite2D");
+						
+						pole.Texture = null;
+					}
+				}
+						
+			}
 		//var node2 = node;
 		//var sprite = GetNode<Sprite2D>("Sprite2D");
 		//var obrazek = GD.Load<Texture2D>("res://asstets/placeholder_straznik_klik.png");

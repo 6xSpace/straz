@@ -1,8 +1,20 @@
-[gd_scene load_steps=2 format=3 uid="uid://ba06gmpah5y0q"]
+[gd_scene load_steps=4 format=3 uid="uid://ba06gmpah5y0q"]
 
+[ext_resource type="Script" uid="uid://cgdccanbvrjt2" path="res://Domek.cs" id="1_833yt"]
 [ext_resource type="Texture2D" uid="uid://djytxvjnvgncw" path="res://asstets/placeholder_domek.png" id="1_seeua"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6t5cn"]
+size = Vector2(30, 30)
+
 [node name="Area2D" type="Node2D"]
+script = ExtResource("1_833yt")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_seeua")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_6t5cn")
+
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]

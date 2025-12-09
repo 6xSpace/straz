@@ -10,6 +10,7 @@ public partial class Main : Node2D
 		GD.Print("chuj");
 		var table = new Board();
 		table.Name = "tableNode";
+		//table.tychNieCzysc.Add("chuj");
 		AddChild(table);
 		table.dodajDomek(1, 1);
 		table.wypisz();

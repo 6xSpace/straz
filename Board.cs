@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public partial class Board : Node2D
 {
@@ -44,6 +45,10 @@ public partial class Board : Node2D
 	
 	public bool szukacSciezki = false;
 	
+	public string? szukajacy = null;
+	
+	public List<string> tychNieCzysc = new List<string>();
+	
 	public void dodajDomek(int x, int y){
 		this.table[y][x] = 3001;
 		//GD.Print(this.table);
@@ -83,7 +88,7 @@ public partial class Board : Node2D
 					GD.Print(node);
 					//var domek = GetNode<Area2D>("domek");
 					var domek1 = GD.Load<PackedScene>("res://domek.tscn");
-					var domeczek = domek1.Instantiate<Node2D>();
+					var domeczek = domek1.Instantiate<Domek>();
 					//AddChild(domek);
 					//domek.Position = new Vector2(10, 15);
 					
@@ -100,7 +105,7 @@ public partial class Board : Node2D
 				}else if (this.table[i][y] == 3002){
 					GD.Print(node);
 					var domek1 = GD.Load<PackedScene>("res://straznik.tscn");
-					var domeczek = domek1.Instantiate<Node2D>();
+					var domeczek = domek1.Instantiate<straznik>();
 					domeczek.Name = "pole"+i+y;
 					node.AddChild(domeczek);
 					GD.Print(domeczek);
@@ -109,7 +114,7 @@ public partial class Board : Node2D
 				}else if (this.table[i][y] == 3003){
 					GD.Print(node);
 					var domek1 = GD.Load<PackedScene>("res://bandyta.tscn");
-					var domeczek = domek1.Instantiate<Node2D>();
+					var domeczek = domek1.Instantiate<Bandyta>();
 					domeczek.Name = "pole"+i+y;
 					node.AddChild(domeczek);
 					GD.Print(domeczek);
@@ -118,7 +123,7 @@ public partial class Board : Node2D
 				} else if (this.table[i][y] == 0){
 					GD.Print(node);
 					var domek1 = GD.Load<PackedScene>("res://puste_pole.tscn");
-					var domeczek = domek1.Instantiate<Node2D>();
+					var domeczek = domek1.Instantiate<PustePole>();
 					domeczek.Name = "pole"+i+y;
 					node.AddChild(domeczek);
 					GD.Print(domeczek);

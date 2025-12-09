@@ -1,9 +1,12 @@
 using Godot;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 public partial class straznik : Node2D
 {
 	bool klikniety = false;
+	List<string> sekwencja = new List<string>();
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -22,9 +25,11 @@ public partial class straznik : Node2D
 				for (int pole_y = 0; pole_y<tablica.table[pole_i].Length; pole_y++){
 					//GD.Print(tablica.table[pole_i][pole_y]);
 					if (tablica.table[pole_i][pole_y] == 0){
-						var pole = GetNode<Sprite2D>("/root/Node2D/pole"+pole_i+pole_y+"/Sprite2D");
+						if (!tablica.tychNieCzysc.Contains("pole"+pole_i+pole_y)){
+							var pole = GetNode<Sprite2D>("/root/Node2D/pole"+pole_i+pole_y+"/Sprite2D");
 						
-						pole.Texture = null;
+							pole.Texture = null;
+						}
 					}
 				}
 						
@@ -77,12 +82,14 @@ public partial class straznik : Node2D
 				if (klikniety == false){
 					klikniety = true;
 					tablica.szukacSciezki = true;
+					tablica.szukajacy = this.Name;
 					var sprite = GetNode<Sprite2D>("Sprite2D");
 					var obrazek = GD.Load<Texture2D>("res://asstets/placeholder_straznik_klik.png");
 					sprite.Texture = obrazek;
 				} else {
 					klikniety = false;
 					tablica.szukacSciezki = false;
+					tablica.szukajacy = null;
 					var sprite = GetNode<Sprite2D>("Sprite2D");
 					var obrazek = GD.Load<Texture2D>("res://asstets/placeholder_straznik.png");
 					sprite.Texture = obrazek;
@@ -151,5 +158,22 @@ public partial class straznik : Node2D
 		if (obszar[pole_i][pole_y+1] == licznik){
 			malyPathfinding(obszar, pole_i, pole_y+1, licznik+1);
 		}
+	}
+	
+	public void otrzymajSekwencje(List<string> sekwencja){
+		GD.Print(string.Join(", ", sekwencja));
+		this.sekwencja = sekwencja;
+		//poruszaj();
+		var tablica = GetNode<Board>("/root/Node2D/tableNode");
+		klikniety = false;
+		tablica.szukacSciezki = false;
+		//tablica.szukajacy = null;
+		//var sprite = GetNode<Sprite2D>("Sprite2D");
+		//var obrazek = GD.Load<Texture2D>("res://asstets/placeholder_straznik.png");
+		//sprite.Texture = obrazek;
+	}
+	
+	public void poruszaj(){
+		GD.Print(this.sekwencja.Last());
 	}
 }

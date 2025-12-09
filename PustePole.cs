@@ -23,15 +23,18 @@ public partial class PustePole : Node2D
 		
 		var tablica = GetNode<Board>("/root/Node2D/tableNode");
 		//GD.Print(tablica);
+		GD.Print(string.Join(", ", tablica.tychNieCzysc));
 		
 		for (int pole_i = 0; pole_i<tablica.table.Length; pole_i++)
 			{
 				for (int pole_y = 0; pole_y<tablica.table[pole_i].Length; pole_y++){
 					//GD.Print(tablica.table[pole_i][pole_y]);
 					if (tablica.table[pole_i][pole_y] == 0){
-						var pole = GetNode<Sprite2D>("/root/Node2D/pole"+pole_i+pole_y+"/Sprite2D");
-						
-						pole.Texture = null;
+						if (!tablica.tychNieCzysc.Contains("pole"+pole_i+pole_y)){
+							var pole = GetNode<Sprite2D>("/root/Node2D/pole"+pole_i+pole_y+"/Sprite2D");
+							
+							pole.Texture = null;
+						}
 					}
 				}
 						
@@ -56,7 +59,7 @@ public partial class PustePole : Node2D
 			
 			sekwencja.Add(this.Name);
 			szukaj(tablica.tablicaSciezki, i, y, tablica.tablicaSciezki[i][y]);
-			GD.Print(string.Join(", ", sekwencja));
+			//GD.Print(string.Join(", ", sekwencja));
 			
 			
 			
@@ -104,5 +107,25 @@ public partial class PustePole : Node2D
 			//pole.Texture = null;
 		//}
 		sekwencja.Clear();
+	}
+	
+	public void _on_area_2d_input_event(Node viewport, InputEvent @event, long shapeIdx){
+		if (@event is InputEventMouseButton mb)
+		{
+			if (mb.ButtonIndex == MouseButton.Left && mb.Pressed)
+			{
+				
+				var tablica = GetNode<Board>("/root/Node2D/tableNode");
+				//////////////////////////////////////////////////////////////
+				//ABSOLUTNE TYPY REFERENCYJNE RIGHT THERE
+				//tablica.tychNieCzysc = sekwencja;
+				foreach (string item in sekwencja){
+					tablica.tychNieCzysc.Add(item);
+				}
+				GD.Print(tablica.szukajacy);
+				var szukajacy = GetNode<straznik>("/root/Node2D/"+tablica.szukajacy);
+				szukajacy.otrzymajSekwencje(sekwencja);
+			}
+		}
 	}
 }

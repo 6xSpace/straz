@@ -20,9 +20,11 @@ public partial class Bandyta : Node2D
 				for (int pole_y = 0; pole_y<tablica.table[pole_i].Length; pole_y++){
 					//GD.Print(tablica.table[pole_i][pole_y]);
 					if (tablica.table[pole_i][pole_y] == 0){
-						var pole = GetNode<Sprite2D>("/root/Node2D/pole"+pole_i+pole_y+"/Sprite2D");
-						
-						pole.Texture = null;
+						if (!tablica.tychNieCzysc.Contains("pole"+pole_i+pole_y)){
+							var pole = GetNode<Sprite2D>("/root/Node2D/pole"+pole_i+pole_y+"/Sprite2D");
+							
+							pole.Texture = null;
+						}
 					}
 				}
 						

@@ -32,7 +32,7 @@ public partial class straznik : Node2D
 				// tutaj zrób co chcesz
 				
 				//DOBIERANIE SIE DO BOARDA
-				var tablica = GetNode<Board>("/root/Node2D/@Node2D@2");
+				var tablica = GetNode<Board>("/root/Node2D/tableNode");
 				GD.Print(tablica);
 				tablica.wypisz();
 				

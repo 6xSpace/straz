@@ -21,7 +21,7 @@ public partial class PustePole : Node2D
 		var obrazek = GD.Load<Texture2D>("res://asstets/puste_klik.png");
 		
 		
-		var tablica = GetNode<Board>("/root/Node2D/@Node2D@2");
+		var tablica = GetNode<Board>("/root/Node2D/tableNode");
 		//GD.Print(tablica);
 		
 		for (int pole_i = 0; pole_i<tablica.table.Length; pole_i++)

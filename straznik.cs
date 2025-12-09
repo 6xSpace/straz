@@ -163,7 +163,7 @@ public partial class straznik : Node2D
 	public void otrzymajSekwencje(List<string> sekwencja){
 		GD.Print(string.Join(", ", sekwencja));
 		this.sekwencja = sekwencja;
-		//poruszaj();
+		poruszaj();
 		var tablica = GetNode<Board>("/root/Node2D/tableNode");
 		klikniety = false;
 		tablica.szukacSciezki = false;
@@ -175,5 +175,43 @@ public partial class straznik : Node2D
 	
 	public void poruszaj(){
 		GD.Print(this.sekwencja.Last());
+		GD.Print(this.Position);
+		
+		string temp = this.Name;
+		char iii = temp[4];
+		string ii = Convert.ToString(iii);
+		int ja_i = Convert.ToInt32(ii);
+		char yyy = temp[5];
+		string yy = Convert.ToString(yyy);
+		int ja_y = Convert.ToInt32(yy);
+		
+		temp = this.sekwencja.Last();
+		iii = temp[4];
+		ii = Convert.ToString(iii);
+		int cel_i = Convert.ToInt32(ii);
+		yyy = temp[5];
+		yy = Convert.ToString(yyy);
+		int cel_y = Convert.ToInt32(yy);
+		
+		var cel = GetNode<PustePole>("/root/Node2D/"+this.sekwencja.Last());
+		var obrazek = GetNode<Sprite2D>("/root/Node2D/"+this.sekwencja.Last()+"/Sprite2D");
+		obrazek.Texture = null;
+		
+		var tablica = GetNode<Board>("/root/Node2D/tableNode");
+		var tempPosition = this.Position;
+		var tempName = this.Name;
+		
+		this.Position = cel.Position;
+		cel.Position = tempPosition;
+		
+		this.Name = cel.Name;
+		cel.Name = tempName;
+		
+		var tempID = tablica.table[ja_i][ja_y];
+		//GD.Print(tempID);
+		tablica.table[ja_i][ja_y] = tablica.table[cel_i][cel_y];
+		tablica.table[cel_i][cel_y] = tempID;
+		
+		this.sekwencja.RemoveAt(this.sekwencja.Count - 1);
 	}
 }

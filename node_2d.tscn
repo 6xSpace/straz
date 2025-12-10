@@ -15,26 +15,30 @@ position = Vector2(250, 150)
 zoom = Vector2(1.5, 1.5)
 
 [node name="bg" type="Sprite2D" parent="."]
+position = Vector2(254.5, 156)
+scale = Vector2(0.4600128, 0.46391755)
 texture = ExtResource("1_wtcfe")
 
 [node name="napisTura" type="RichTextLabel" parent="."]
 modulate = Color(0, 0, 0, 1)
 self_modulate = Color(0, 0, 0, 1)
-offset_left = 92.0
-offset_top = -54.0
-offset_right = 294.0
-offset_bottom = -14.0
+offset_left = 399.0
+offset_top = 36.0
+offset_right = 601.0
+offset_bottom = 76.0
 
 [node name="skipTureButton" type="Node2D" parent="."]
+position = Vector2(-53, 30)
 
 [node name="Area2D" type="Area2D" parent="skipTureButton"]
+position = Vector2(363, 85)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="skipTureButton/Area2D"]
 position = Vector2(50, -43)
 shape = SubResource("RectangleShape2D_0e48y")
 
 [node name="Sprite2D" type="Sprite2D" parent="skipTureButton"]
-position = Vector2(50, -43)
+position = Vector2(413, 42)
 texture = ExtResource("3_epypp")
 
 [connection signal="input_event" from="skipTureButton/Area2D" to="." method="_on_area_2d_input_event"]

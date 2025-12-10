@@ -54,21 +54,23 @@ public partial class PustePole : Node2D
 			//GD.Print(tablica.table[i][y]);
 			
 			
-			
-			
-			
-			sekwencja.Add(this.Name);
-			szukaj(tablica.tablicaSciezki, i, y, tablica.tablicaSciezki[i][y]);
-			//GD.Print(string.Join(", ", sekwencja));
-			
-			
-			
-			foreach (var item in sekwencja){
-				//GD.Print(item);
-				var pole = GetNode<Sprite2D>("/root/Node2D/"+item+"/Sprite2D");
-				//GD.Print(pole);
-				pole.Texture = obrazek;
+			if (tablica.tablicaSciezki[i][y] != 9999){
+				sekwencja.Add(this.Name);
+				szukaj(tablica.tablicaSciezki, i, y, tablica.tablicaSciezki[i][y]);
+				//GD.Print(string.Join(", ", sekwencja));
+				
+				
+				
+				foreach (var item in sekwencja){
+					//GD.Print(item);
+					var pole = GetNode<Sprite2D>("/root/Node2D/"+item+"/Sprite2D");
+					//GD.Print(pole);
+					pole.Texture = obrazek;
+				}
 			}
+			
+			
+			
 		}
 		sprite.Texture = obrazek;
 	}
@@ -116,7 +118,7 @@ public partial class PustePole : Node2D
 			{
 				
 				var tablica = GetNode<Board>("/root/Node2D/tableNode");
-				if (!tablica.wylaczKlikanie && tablica.szukajacy != null){
+				if (!tablica.wylaczKlikanie && tablica.szukajacy != null && sekwencja.Count > 0){
 					tablica.wylaczKlikanie = true;
 					//////////////////////////////////////////////////////////////
 					//ABSOLUTNE TYPY REFERENCYJNE RIGHT THERE

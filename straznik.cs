@@ -118,6 +118,18 @@ public partial class straznik : Node2D
 		
 		
 		
+		
+		
+		for (int pole_i = 0; pole_i<obszar.Length; pole_i++)
+		{
+			for (int pole_y = 0; pole_y<obszar[pole_i].Length; pole_y++){
+				//GD.Print(tablica.table[pole_i][pole_y]);
+				if (obszar[pole_i][pole_y] == 0){
+					obszar[pole_i][pole_y] = 9999;
+				}
+			}
+		}
+		
 		foreach(var chuj in obszar)
 		{
 			//foreach(var y in i){

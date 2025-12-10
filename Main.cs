@@ -39,6 +39,9 @@ public partial class Main : Node2D
 		tura++;
 		var napis = GetNode<RichTextLabel>("napisTura");
 		napis.Text = "Tura "+tura;
+		
+		var table = GetNode<Board>("tableNode");
+		table.tura();
 	}
 	
 	public void _on_area_2d_input_event(Node viewport, InputEvent @event, long shapeIdx){

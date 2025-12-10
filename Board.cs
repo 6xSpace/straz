@@ -49,6 +49,8 @@ public partial class Board : Node2D
 	
 	public List<string> tychNieCzysc = new List<string>();
 	
+	public List<straznik> straznicy = new List<straznik>();
+	
 	public void dodajDomek(int x, int y){
 		this.table[y][x] = 3001;
 		//GD.Print(this.table);
@@ -80,12 +82,19 @@ public partial class Board : Node2D
 		return table;
 	}
 	
+	public void tura(){
+		//GD.Print("chuj");
+		foreach (var straznik in this.straznicy){
+			straznik.poruszaj();
+		}
+	}
+	
 	public void generuj(dynamic node){
 		for (int i = 0; i<this.table.Length; i++)
 		{
 			for (int y = 0; y<this.table[i].Length; y++){
 				if (this.table[i][y] == 3001){
-					GD.Print(node);
+					//GD.Print(node);
 					//var domek = GetNode<Area2D>("domek");
 					var domek1 = GD.Load<PackedScene>("res://domek.tscn");
 					var domeczek = domek1.Instantiate<Domek>();
@@ -99,34 +108,40 @@ public partial class Board : Node2D
 					//domek.Texture = obrazek;
 					domeczek.Name = "pole"+i+y;
 					node.AddChild(domeczek);
-					GD.Print(domeczek);
+					//GD.Print(domeczek);
 					domeczek.Position = new Vector2(30*i, 30*y);
 					
 				}else if (this.table[i][y] == 3002){
-					GD.Print(node);
+					//GD.Print(node);
 					var domek1 = GD.Load<PackedScene>("res://straznik.tscn");
 					var domeczek = domek1.Instantiate<straznik>();
 					domeczek.Name = "pole"+i+y;
 					node.AddChild(domeczek);
-					GD.Print(domeczek);
+					//GD.Print(domeczek);
 					domeczek.Position = new Vector2(30*i, 30*y);
 					
+					this.straznicy.Add(domeczek);
+					GD.Print("", string.Join(", ", this.straznicy));
+					//foreach (var straznik in this.straznicy){
+						//straznik.poruszaj();
+					//}
+					
 				}else if (this.table[i][y] == 3003){
-					GD.Print(node);
+					//GD.Print(node);
 					var domek1 = GD.Load<PackedScene>("res://bandyta.tscn");
 					var domeczek = domek1.Instantiate<Bandyta>();
 					domeczek.Name = "pole"+i+y;
 					node.AddChild(domeczek);
-					GD.Print(domeczek);
+					//GD.Print(domeczek);
 					domeczek.Position = new Vector2(30*i, 30*y);
 					
 				} else if (this.table[i][y] == 0){
-					GD.Print(node);
+					//GD.Print(node);
 					var domek1 = GD.Load<PackedScene>("res://puste_pole.tscn");
 					var domeczek = domek1.Instantiate<PustePole>();
 					domeczek.Name = "pole"+i+y;
 					node.AddChild(domeczek);
-					GD.Print(domeczek);
+					//GD.Print(domeczek);
 					domeczek.Position = new Vector2(30*i, 30*y);
 					
 				}

@@ -15,6 +15,7 @@ public partial class Domek : Node2D
 	
 	public void _on_area_2d_mouse_entered(){
 		var tablica = GetNode<Board>("/root/Node2D/tableNode");
+		tablica.wypisz();
 		for (int pole_i = 0; pole_i<tablica.table.Length; pole_i++)
 			{
 				for (int pole_y = 0; pole_y<tablica.table[pole_i].Length; pole_y++){

@@ -78,22 +78,24 @@ public partial class straznik : Node2D
 				tablica.wypisz();
 				/////////////////////////////////////////////////////////////////////
 				
-				
-				if (klikniety == false){
-					klikniety = true;
-					tablica.szukacSciezki = true;
-					tablica.szukajacy = this.Name;
-					var sprite = GetNode<Sprite2D>("Sprite2D");
-					var obrazek = GD.Load<Texture2D>("res://asstets/placeholder_straznik_klik.png");
-					sprite.Texture = obrazek;
-				} else {
-					klikniety = false;
-					tablica.szukacSciezki = false;
-					tablica.szukajacy = null;
-					var sprite = GetNode<Sprite2D>("Sprite2D");
-					var obrazek = GD.Load<Texture2D>("res://asstets/placeholder_straznik.png");
-					sprite.Texture = obrazek;
+					if (this.sekwencja.Count == 0){
+						if (klikniety == false){
+						klikniety = true;
+						tablica.szukacSciezki = true;
+						tablica.szukajacy = this.Name;
+						var sprite = GetNode<Sprite2D>("Sprite2D");
+						var obrazek = GD.Load<Texture2D>("res://asstets/placeholder_straznik_klik.png");
+						sprite.Texture = obrazek;
+					} else {
+						klikniety = false;
+						tablica.szukacSciezki = false;
+						tablica.szukajacy = null;
+						var sprite = GetNode<Sprite2D>("Sprite2D");
+						var obrazek = GD.Load<Texture2D>("res://asstets/placeholder_straznik.png");
+						sprite.Texture = obrazek;
+					}
 				}
+				
 			}
 		}
 	}
@@ -234,6 +236,9 @@ public partial class straznik : Node2D
 				var sprite = GetNode<Sprite2D>("Sprite2D");
 				var obrazek1 = GD.Load<Texture2D>("res://asstets/placeholder_straznik.png");
 				sprite.Texture = obrazek1;
+				
+				tablica.wylaczKlikanie = false;
+				tablica.szukajacy = null;
 			}
 			//GD.Print(ja_i, ja_y, cel_i, cel_y);
 			//GD.Print(this.Name);

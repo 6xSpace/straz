@@ -116,15 +116,19 @@ public partial class PustePole : Node2D
 			{
 				
 				var tablica = GetNode<Board>("/root/Node2D/tableNode");
-				//////////////////////////////////////////////////////////////
-				//ABSOLUTNE TYPY REFERENCYJNE RIGHT THERE
-				//tablica.tychNieCzysc = sekwencja;
-				foreach (string item in sekwencja){
-					tablica.tychNieCzysc.Add(item);
+				if (!tablica.wylaczKlikanie && tablica.szukajacy != null){
+					tablica.wylaczKlikanie = true;
+					//////////////////////////////////////////////////////////////
+					//ABSOLUTNE TYPY REFERENCYJNE RIGHT THERE
+					//tablica.tychNieCzysc = sekwencja;
+					foreach (string item in sekwencja){
+						tablica.tychNieCzysc.Add(item);
+					}
+					GD.Print(tablica.szukajacy);
+					var szukajacy = GetNode<straznik>("/root/Node2D/"+tablica.szukajacy);
+					szukajacy.otrzymajSekwencje(sekwencja);
 				}
-				GD.Print(tablica.szukajacy);
-				var szukajacy = GetNode<straznik>("/root/Node2D/"+tablica.szukajacy);
-				szukajacy.otrzymajSekwencje(sekwencja);
+				
 			}
 		}
 	}

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public partial class Board : Node2D
 {
 
-	
+	public bool wylaczKlikanie = false;
 
 
 	public int[][] table = 

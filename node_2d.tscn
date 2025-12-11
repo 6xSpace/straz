@@ -41,4 +41,8 @@ shape = SubResource("RectangleShape2D_0e48y")
 position = Vector2(413, 42)
 texture = ExtResource("3_epypp")
 
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
 [connection signal="input_event" from="skipTureButton/Area2D" to="." method="_on_area_2d_input_event"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

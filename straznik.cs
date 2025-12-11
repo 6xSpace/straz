@@ -86,6 +86,9 @@ public partial class straznik : Node2D
 						var sprite = GetNode<Sprite2D>("Sprite2D");
 						var obrazek = GD.Load<Texture2D>("res://asstets/placeholder_straznik_klik.png");
 						sprite.Texture = obrazek;
+						
+						var timer = GetNode<Timer>("/root/Node2D/Timer");
+						timer.Stop();
 					} else {
 						klikniety = false;
 						tablica.szukacSciezki = false;
@@ -93,6 +96,9 @@ public partial class straznik : Node2D
 						var sprite = GetNode<Sprite2D>("Sprite2D");
 						var obrazek = GD.Load<Texture2D>("res://asstets/placeholder_straznik.png");
 						sprite.Texture = obrazek;
+						
+						var timer = GetNode<Timer>("/root/Node2D/Timer");
+						timer.Start();
 					}
 				}
 				

@@ -32,6 +32,17 @@ public partial class Main : Node2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+		
+	}
+	
+	public void _on_timer_timeout(){
+		GD.Print("CHUUUUJ");
+		var table = GetNode<Board>("tableNode");
+		GD.Print(table.szukacSciezki);
+		if (!table.szukacSciezki){
+			this.zmianaTury();
+			
+		}
 	}
 	
 	public void wypisz(){

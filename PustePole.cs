@@ -118,6 +118,7 @@ public partial class PustePole : Node2D
 			{
 				
 				var tablica = GetNode<Board>("/root/Node2D/tableNode");
+				tablica.szukacSciezki = false;
 				if (!tablica.wylaczKlikanie && tablica.szukajacy != null && sekwencja.Count > 0){
 					tablica.wylaczKlikanie = true;
 					//////////////////////////////////////////////////////////////
@@ -129,6 +130,9 @@ public partial class PustePole : Node2D
 					GD.Print(tablica.szukajacy);
 					var szukajacy = GetNode<straznik>("/root/Node2D/"+tablica.szukajacy);
 					szukajacy.otrzymajSekwencje(sekwencja);
+					
+					var timer = GetNode<Timer>("/root/Node2D/Timer");
+					timer.Start();
 				}
 				
 			}

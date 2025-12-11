@@ -3,6 +3,8 @@ using System;
 
 public partial class Main : Node2D
 {
+	public double tempo = 1;
+	public bool paused = false;
 	public int tura = 0;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -21,6 +23,9 @@ public partial class Main : Node2D
 		
 		var napis = GetNode<RichTextLabel>("napisTura");
 		napis.Text = "Tura 0";
+		
+		var napis2 = GetNode<RichTextLabel>("napisTempo");
+		napis2.Text = "tura co: 1s";
 		//napis.Color = "black";
 		
 		//var domek = new Sprite2D();
@@ -36,9 +41,9 @@ public partial class Main : Node2D
 	}
 	
 	public void _on_timer_timeout(){
-		GD.Print("CHUUUUJ");
+		//GD.Print("CHUUUUJ");
 		var table = GetNode<Board>("tableNode");
-		GD.Print(table.szukacSciezki);
+		//GD.Print(table.szukacSciezki);
 		if (!table.szukacSciezki){
 			this.zmianaTury();
 			
@@ -64,6 +69,63 @@ public partial class Main : Node2D
 			if (mb.ButtonIndex == MouseButton.Left && mb.Pressed)
 			{
 				zmianaTury();
+			}
+		}
+	}
+	
+	public void _on_area_2d_input_event_szybciej(Node viewport, InputEvent @event, long shapeIdx){
+		if (@event is InputEventMouseButton mb)
+		{
+			if (mb.ButtonIndex == MouseButton.Left && mb.Pressed)
+			{
+				if (this.tempo > 0.25 && !this.paused){
+					this.tempo -= 0.25;
+					var timer = GetNode<Timer>("/root/Node2D/Timer");
+					timer.WaitTime = tempo;
+					var napis2 = GetNode<RichTextLabel>("napisTempo");
+					napis2.Text = "tura co: "+this.tempo+"s.";
+				}
+				
+			}
+		}
+	}
+	
+	public void _on_area_2d_input_event_wolniej(Node viewport, InputEvent @event, long shapeIdx){
+		if (@event is InputEventMouseButton mb)
+		{
+			if (mb.ButtonIndex == MouseButton.Left && mb.Pressed)
+			{
+				if (this.tempo < 5 && !this.paused){
+					this.tempo += 0.25;
+					var timer = GetNode<Timer>("/root/Node2D/Timer");
+					timer.WaitTime = tempo;
+					var napis2 = GetNode<RichTextLabel>("napisTempo");
+					napis2.Text = "tura co: "+this.tempo+"s.";
+				}
+				
+			}
+		}
+	}
+	
+	public void _on_area_2d_input_event_pauza(Node viewport, InputEvent @event, long shapeIdx){
+		if (@event is InputEventMouseButton mb)
+		{
+			if (mb.ButtonIndex == MouseButton.Left && mb.Pressed)
+			{
+				if (this.paused){
+					this.paused = false;
+					var timer = GetNode<Timer>("/root/Node2D/Timer");
+					timer.Start();
+					var napis2 = GetNode<RichTextLabel>("napisTempo");
+					napis2.Text = "tura co: "+this.tempo+"s.";
+				} else {
+					this.paused = true;
+					var timer = GetNode<Timer>("/root/Node2D/Timer");
+					timer.Stop();
+					var napis2 = GetNode<RichTextLabel>("napisTempo");
+					napis2.Text = "pauza";
+				}
+				
 			}
 		}
 	}

@@ -44,5 +44,57 @@ texture = ExtResource("3_epypp")
 [node name="Timer" type="Timer" parent="."]
 autostart = true
 
+[node name="szybciejButton" type="Node2D" parent="."]
+position = Vector2(160, 143)
+
+[node name="Area2D" type="Area2D" parent="szybciejButton"]
+position = Vector2(363, 85)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="szybciejButton/Area2D"]
+position = Vector2(50, -43)
+shape = SubResource("RectangleShape2D_0e48y")
+
+[node name="Sprite2D" type="Sprite2D" parent="szybciejButton"]
+position = Vector2(413, 42)
+texture = ExtResource("3_epypp")
+
+[node name="wolniejButton" type="Node2D" parent="."]
+position = Vector2(-46, 143)
+
+[node name="Area2D" type="Area2D" parent="wolniejButton"]
+position = Vector2(363, 85)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="wolniejButton/Area2D"]
+position = Vector2(50, -43)
+shape = SubResource("RectangleShape2D_0e48y")
+
+[node name="Sprite2D" type="Sprite2D" parent="wolniejButton"]
+position = Vector2(413, 42)
+texture = ExtResource("3_epypp")
+
+[node name="pauseButton" type="Node2D" parent="."]
+position = Vector2(47, 99)
+
+[node name="Area2D" type="Area2D" parent="pauseButton"]
+position = Vector2(363, 85)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="pauseButton/Area2D"]
+position = Vector2(50, -43)
+shape = SubResource("RectangleShape2D_0e48y")
+
+[node name="Sprite2D" type="Sprite2D" parent="pauseButton"]
+position = Vector2(413, 42)
+texture = ExtResource("3_epypp")
+
+[node name="napisTempo" type="RichTextLabel" parent="."]
+modulate = Color(0, 0, 0, 1)
+offset_left = 404.0
+offset_top = 180.0
+offset_right = 551.0
+offset_bottom = 220.0
+
 [connection signal="input_event" from="skipTureButton/Area2D" to="." method="_on_area_2d_input_event"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="input_event" from="szybciejButton/Area2D" to="." method="_on_area_2d_input_event_szybciej"]
+[connection signal="input_event" from="wolniejButton/Area2D" to="." method="_on_area_2d_input_event_wolniej"]
+[connection signal="input_event" from="pauseButton/Area2D" to="." method="_on_area_2d_input_event_pauza"]

@@ -132,7 +132,11 @@ public partial class PustePole : Node2D
 					szukajacy.otrzymajSekwencje(sekwencja);
 					
 					var timer = GetNode<Timer>("/root/Node2D/Timer");
-					timer.Start();
+					
+					var tata = GetNode<Main>("/root/Node2D");
+					if (!tata.paused){
+						timer.Start();
+					}
 				}
 				
 			}

@@ -73,7 +73,11 @@ public partial class straznik : Node2D
 						if (klikniety == false){
 						klikniety = true;
 						tablica.szukacSciezki = true;
-						tablica.szukajacy = this.Name;
+						if (tablica.szukajacy.Count == 0){
+							tablica.szukajacy.Add(this.Name);
+						} else {
+							tablica.szukajacy[0] = this.Name;
+						}
 						var sprite = GetNode<Sprite2D>("Sprite2D");
 						var obrazek = GD.Load<Texture2D>("res://asstets/placeholder_straznik_klik.png");
 						sprite.Texture = obrazek;
@@ -83,7 +87,7 @@ public partial class straznik : Node2D
 					} else {
 						klikniety = false;
 						tablica.szukacSciezki = false;
-						tablica.szukajacy = null;
+						tablica.szukajacy.RemoveAt(0);
 						var sprite = GetNode<Sprite2D>("Sprite2D");
 						var obrazek = GD.Load<Texture2D>("res://asstets/placeholder_straznik.png");
 						sprite.Texture = obrazek;
@@ -220,7 +224,7 @@ public partial class straznik : Node2D
 				sprite.Texture = obrazek1;
 				
 				tablica.wylaczKlikanie = false;
-				tablica.szukajacy = null;
+				tablica.szukajacy.RemoveAt(0);
 			}
 			tablica.wypisz();
 		}

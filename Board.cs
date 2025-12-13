@@ -45,7 +45,7 @@ public partial class Board : Node2D
 	
 	public bool szukacSciezki = false;
 	
-	public string? szukajacy = null;
+	public List<string> szukajacy = new List<string>();
 	
 	public List<string> tychNieCzysc = new List<string>();
 	

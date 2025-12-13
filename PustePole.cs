@@ -49,7 +49,7 @@ public partial class PustePole : Node2D
 			string yy = Convert.ToString(yyy);
 			int y = Convert.ToInt32(yy);
 			
-			var szukajacy = GetNode<straznik>("/root/Node2D/"+tablica.szukajacy);
+			var szukajacy = GetNode<straznik>("/root/Node2D/"+tablica.szukajacy[0]);
 			
 			if (szukajacy.tablicaSciezki[i][y] != 9999){
 				sekwencja.Add(this.Name);
@@ -102,15 +102,15 @@ public partial class PustePole : Node2D
 				
 				var tablica = GetNode<Board>("/root/Node2D/tableNode");
 				tablica.szukacSciezki = false;
-				if (!tablica.wylaczKlikanie && tablica.szukajacy != null && sekwencja.Count > 0){
+				if (!tablica.wylaczKlikanie && tablica.szukajacy.Count != 0 && sekwencja.Count > 0){
 					tablica.wylaczKlikanie = true;
 					//////////////////////////////////////////////////////////////
 					//ABSOLUTNE TYPY REFERENCYJNE RIGHT THERE
 					foreach (string item in sekwencja){
 						tablica.tychNieCzysc.Add(item);
 					}
-					GD.Print(tablica.szukajacy);
-					var szukajacy = GetNode<straznik>("/root/Node2D/"+tablica.szukajacy);
+					//GD.Print(tablica.szukajacy[0]);
+					var szukajacy = GetNode<straznik>("/root/Node2D/"+tablica.szukajacy[0]);
 					szukajacy.otrzymajSekwencje(sekwencja);
 					
 					var timer = GetNode<Timer>("/root/Node2D/Timer");

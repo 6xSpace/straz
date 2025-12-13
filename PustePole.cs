@@ -23,7 +23,7 @@ public partial class PustePole : Node2D
 		
 		var tablica = GetNode<Board>("/root/Node2D/tableNode");
 		//GD.Print(tablica);
-		GD.Print(string.Join(", ", tablica.tychNieCzysc));
+		//GD.Print(string.Join(", ", tablica.tychNieCzysc));
 		
 		for (int pole_i = 0; pole_i<tablica.table.Length; pole_i++)
 			{
@@ -65,6 +65,8 @@ public partial class PustePole : Node2D
 			
 		}
 		sprite.Texture = obrazek;
+		
+		GD.Print(string.Join(", ", sekwencja));
 	}
 	
 	public void szukaj(dynamic obszar, int pole_i, int pole_y, int licznik){
@@ -103,6 +105,7 @@ public partial class PustePole : Node2D
 				var tablica = GetNode<Board>("/root/Node2D/tableNode");
 				tablica.szukacSciezki = false;
 				if (!tablica.wylaczKlikanie && tablica.szukajacy.Count != 0 && sekwencja.Count > 0){
+					GD.Print("weszło!");
 					tablica.wylaczKlikanie = true;
 					//////////////////////////////////////////////////////////////
 					//ABSOLUTNE TYPY REFERENCYJNE RIGHT THERE

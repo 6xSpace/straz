@@ -84,6 +84,8 @@ public partial class straznik : Node2D
 						
 						var timer = GetNode<Timer>("/root/Node2D/Timer");
 						timer.Stop();
+						
+						tablica.wylaczKlikanie = false;
 					} else {
 						klikniety = false;
 						tablica.szukacSciezki = false;
@@ -94,6 +96,9 @@ public partial class straznik : Node2D
 						
 						var timer = GetNode<Timer>("/root/Node2D/Timer");
 						timer.Start();
+						
+						tablica.wylaczKlikanie = true;
+						
 					}
 				}
 				

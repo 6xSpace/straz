@@ -7,6 +7,17 @@ public partial class straznik : Node2D
 {
 	bool klikniety = false;
 	List<string> sekwencja = new List<string>();
+	public int[][] tablicaSciezki = 
+	[[0,0,0,0,0,0,0,0,0,0,],
+	[0,0,0,0,0,0,0,0,0,0,],
+	[0,0,0,0,0,0,0,0,0,0,],
+	[0,0,0,0,0,0,0,0,0,0,],
+	[0,0,0,0,0,0,0,0,0,0,],
+	[0,0,0,0,0,0,0,0,0,0,],
+	[0,0,0,0,0,0,0,0,0,0,],
+	[0,0,0,0,0,0,0,0,0,0,],
+	[0,0,0,0,0,0,0,0,0,0,],
+	[0,0,0,0,0,0,0,0,0,0,]] ;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -64,7 +75,7 @@ public partial class straznik : Node2D
 				{
 					for (int pole_y = 0; pole_y<tablica.table[pole_i].Length; pole_y++){
 						//GD.Print(tablica.table[pole_i][pole_y]);
-						tablica.tablicaSciezki[pole_i][pole_y] = tablica.table[pole_i][pole_y];
+						this.tablicaSciezki[pole_i][pole_y] = tablica.table[pole_i][pole_y];
 					}
 							
 				}
@@ -73,7 +84,9 @@ public partial class straznik : Node2D
 				//tablica.szukacSciezki = true;
 				//tablica.wypisz();
 				
-				this.pathfinding(tablica.tablicaSciezki);
+				//this.tablicaSciezki = tablica.table;
+				
+				this.pathfinding(this.tablicaSciezki);
 				
 				tablica.wypisz();
 				/////////////////////////////////////////////////////////////////////

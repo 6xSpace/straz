@@ -53,10 +53,13 @@ public partial class PustePole : Node2D
 			//GD.Print(y);
 			//GD.Print(tablica.table[i][y]);
 			
+			//GD.Print(tablica.szukajacy);
 			
-			if (tablica.tablicaSciezki[i][y] != 9999){
+			var szukajacy = GetNode<straznik>("/root/Node2D/"+tablica.szukajacy);
+			
+			if (szukajacy.tablicaSciezki[i][y] != 9999){
 				sekwencja.Add(this.Name);
-				szukaj(tablica.tablicaSciezki, i, y, tablica.tablicaSciezki[i][y]);
+				szukaj(szukajacy.tablicaSciezki, i, y, szukajacy.tablicaSciezki[i][y]);
 				//GD.Print(string.Join(", ", sekwencja));
 				
 				

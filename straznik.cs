@@ -200,7 +200,7 @@ public partial class straznik : Node2D
 			yy = Convert.ToString(yyy);
 			int cel_y = Convert.ToInt32(yy);
 			
-			if (tablica.table[cel_i][cel_y] < 3000){
+			if (tablica.table[cel_i][cel_y] != 3002){
 				var cel = GetNode<PustePole>("/root/Node2D/"+this.sekwencja.Last());
 					var obrazek = GetNode<Sprite2D>("/root/Node2D/"+this.sekwencja.Last()+"/Sprite2D");
 					obrazek.Texture = null;
@@ -243,6 +243,84 @@ public partial class straznik : Node2D
 				} else {
 					//GD.Print("stoję! moja sekwencja: ");
 					//GD.Print("", string.Join(", ", this.sekwencja));
+					
+					//rozwiązanie typu bumper
+					//zderzenie wyłącza strażnikom ruch
+					
+					//foreach (var item in tablica.straznicy){
+						//if (item.Name == this.sekwencja.Last()){
+							//item.poruszaj();
+							//item.stop = true;
+							////this.poruszaj();
+						//}
+					//}
+					foreach (var item in tablica.straznicy){
+						if (this.sekwencja.Count != 0){
+							if (item.Name == this.sekwencja.Last()){
+								
+							if (item.sekwencja.Count() == 0){
+								tablica.tychNieCzysc = tablica.tychNieCzysc.Except(this.sekwencja).ToList();
+								this.sekwencja.Clear();
+								var sprite = GetNode<Sprite2D>("Sprite2D");
+								var obrazek1 = GD.Load<Texture2D>("res://asstets/placeholder_straznik.png");
+								sprite.Texture = obrazek1;
+									
+								tablica.wylaczKlikanie = false;
+								if (tablica.szukajacy.Count > 0){
+									tablica.szukajacy.RemoveAt(0);
+								}
+							} else if (this.Name == item.sekwencja.Last()){
+								
+								tablica.tychNieCzysc = tablica.tychNieCzysc.Except(this.sekwencja).ToList();
+								tablica.tychNieCzysc = tablica.tychNieCzysc.Except(item.sekwencja).ToList();
+								
+								this.sekwencja.Clear();
+								var sprite = GetNode<Sprite2D>("Sprite2D");
+								var obrazek1 = GD.Load<Texture2D>("res://asstets/placeholder_straznik.png");
+								sprite.Texture = obrazek1;
+									
+								tablica.wylaczKlikanie = false;
+								if (tablica.szukajacy.Count > 0){
+									tablica.szukajacy.RemoveAt(0);
+								}
+								
+								item.sekwencja.Clear();
+								var sprite2 = GetNode<Sprite2D>("/root/Node2D/" + item.Name + "/Sprite2D");
+								//var obrazek2 = GD.Load<Texture2D>("res://asstets/placeholder_straznik.png");
+								sprite2.Texture = obrazek1;
+									
+									
+								for (int pole_i = 0; pole_i<tablica.table.Length; pole_i++)
+								{
+									for (int pole_y = 0; pole_y<tablica.table[pole_i].Length; pole_y++){
+										//GD.Print(tablica.table[pole_i][pole_y]);
+										if (tablica.table[pole_i][pole_y] == 0){
+											if (!tablica.tychNieCzysc.Contains("pole"+pole_i+pole_y)){
+												var pole = GetNode<Sprite2D>("/root/Node2D/pole"+pole_i+pole_y+"/Sprite2D");
+											
+												pole.Texture = null;
+											}
+										}
+									}
+											
+								}
+							}
+							//item.poruszaj();
+							//item.stop = true;
+							//this.poruszaj();
+						}
+						}
+						
+					}
+					//this.sekwencja.Clear();
+					//var sprite = GetNode<Sprite2D>("Sprite2D");
+					//var obrazek1 = GD.Load<Texture2D>("res://asstets/placeholder_straznik.png");
+					//sprite.Texture = obrazek1;
+						//
+					//tablica.wylaczKlikanie = false;
+					//if (tablica.szukajacy.Count > 0){
+						//tablica.szukajacy.RemoveAt(0);
+					//}
 				}
 			}
 			

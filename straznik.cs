@@ -178,8 +178,12 @@ public partial class straznik : Node2D
 	
 	public void poruszaj(){
 		//GD.Print(this.sekwencja);
+		GD.Print("straznik z "+this.Name);
 		GD.Print("", string.Join(", ", this.sekwencja));
 		if (this.sekwencja.Count > 0){
+			
+			var tablica = GetNode<Board>("/root/Node2D/tableNode");
+			
 			string temp = this.Name;
 			char iii = temp[4];
 			string ii = Convert.ToString(iii);
@@ -196,43 +200,53 @@ public partial class straznik : Node2D
 			yy = Convert.ToString(yyy);
 			int cel_y = Convert.ToInt32(yy);
 			
-			var cel = GetNode<PustePole>("/root/Node2D/"+this.sekwencja.Last());
-			var obrazek = GetNode<Sprite2D>("/root/Node2D/"+this.sekwencja.Last()+"/Sprite2D");
-			obrazek.Texture = null;
-			
-			var tablica = GetNode<Board>("/root/Node2D/tableNode");
-			var tempPosition = this.Position;
-			var tempName = this.Name;
-			var tempName2 = cel.Name;
-			
-			this.Position = cel.Position;
-			cel.Position = tempPosition;
-			
-			cel.Name = "chuj";
-			this.Name = tempName2;
-			cel.Name = tempName;
-			GD.Print(this.Name);
-			
-			var tempID = tablica.table[ja_i][ja_y];
-			
-			////////////////////////////////////////////////////
-			//GD.Print(tempID);
-			tablica.table[ja_i][ja_y] = tablica.table[cel_i][cel_y];
-			tablica.table[cel_i][cel_y] = tempID;
-			
-			tablica.tychNieCzysc.RemoveAt(this.sekwencja.Count - 1);
-			this.sekwencja.RemoveAt(this.sekwencja.Count - 1);
-			
-			if (this.sekwencja.Count == 0){
-				var sprite = GetNode<Sprite2D>("Sprite2D");
-				var obrazek1 = GD.Load<Texture2D>("res://asstets/placeholder_straznik.png");
-				sprite.Texture = obrazek1;
-				
-				tablica.wylaczKlikanie = false;
-				tablica.szukajacy.RemoveAt(0);
+			if (tablica.table[cel_i][cel_y] < 3000){
+				var cel = GetNode<PustePole>("/root/Node2D/"+this.sekwencja.Last());
+					var obrazek = GetNode<Sprite2D>("/root/Node2D/"+this.sekwencja.Last()+"/Sprite2D");
+					obrazek.Texture = null;
+					
+					//var tablica = GetNode<Board>("/root/Node2D/tableNode");
+					var tempPosition = this.Position;
+					var tempName = this.Name;
+					var tempName2 = cel.Name;
+					
+					this.Position = cel.Position;
+					cel.Position = tempPosition;
+					
+					cel.Name = "chuj";
+					this.Name = tempName2;
+					cel.Name = tempName;
+					//GD.Print(this.Name);
+					
+					var tempID = tablica.table[ja_i][ja_y];
+					
+					////////////////////////////////////////////////////
+					//GD.Print(tempID);
+					tablica.table[ja_i][ja_y] = tablica.table[cel_i][cel_y];
+					tablica.table[cel_i][cel_y] = tempID;
+					
+					tablica.tychNieCzysc.RemoveAt(this.sekwencja.Count - 1);
+					this.sekwencja.RemoveAt(this.sekwencja.Count - 1);
+					
+					if (this.sekwencja.Count == 0){
+						var sprite = GetNode<Sprite2D>("Sprite2D");
+						var obrazek1 = GD.Load<Texture2D>("res://asstets/placeholder_straznik.png");
+						sprite.Texture = obrazek1;
+						
+						tablica.wylaczKlikanie = false;
+						if (tablica.szukajacy.Count > 0){
+							tablica.szukajacy.RemoveAt(0);
+							
+						}
+					}
+					//tablica.wypisz();
+				} else {
+					//GD.Print("stoję! moja sekwencja: ");
+					//GD.Print("", string.Join(", ", this.sekwencja));
+				}
 			}
-			tablica.wypisz();
-		}
+			
+			
 		
 	}
 }

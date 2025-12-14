@@ -66,7 +66,7 @@ public partial class PustePole : Node2D
 		}
 		sprite.Texture = obrazek;
 		
-		GD.Print(string.Join(", ", sekwencja));
+		//GD.Print(string.Join(", ", sekwencja));
 	}
 	
 	public void szukaj(dynamic obszar, int pole_i, int pole_y, int licznik){

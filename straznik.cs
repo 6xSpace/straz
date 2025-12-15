@@ -185,12 +185,29 @@ public partial class straznik : Node2D
 	}
 	
 	public void poruszaj(){
+		
+		
 		//GD.Print(this.sekwencja);
 		GD.Print("straznik z "+this.Name);
 		GD.Print("", string.Join(", ", this.sekwencja));
 		if (this.sekwencja.Count > 0){
 			
 			var tablica = GetNode<Board>("/root/Node2D/tableNode");
+			
+			//for (int pole_i = 0; pole_i<tablica.table.Length; pole_i++)
+			//{
+				//for (int pole_y = 0; pole_y<tablica.table[pole_i].Length; pole_y++){
+					////GD.Print(tablica.table[pole_i][pole_y]);
+					//if (tablica.table[pole_i][pole_y] == 0){
+						//if (tablica.tychNieCzysc.Contains("pole"+pole_i+pole_y)){
+							//var pole = GetNode<Sprite2D>("/root/Node2D/pole"+pole_i+pole_y+"/Sprite2D");
+							//var obrazek = GD.Load<Texture2D>("res://asstets/puste_klik.png");
+							//pole.Texture = obrazek;
+						//}
+					//}
+				//}
+						//
+			//}
 			
 			string temp = this.Name;
 			char iii = temp[4];
@@ -236,7 +253,24 @@ public partial class straznik : Node2D
 					//tablica.tychNieCzysc.RemoveAt(this.sekwencja.Count - 1);
 					List<string> templist = new List<string>();
 					templist.Add(this.sekwencja[(this.sekwencja.Count - 1)]);
+					//GD.Print(this.sekwencja[this.sekwencja.Count-1]);
+					//GD.Print("", string.Join(", ", tablica.tychNieCzysc));
+					var duplicates = tablica.tychNieCzysc.GroupBy(x => x).Where(group => group.Count() > 1).Select(group => group.Key);
+					
 					tablica.tychNieCzysc = tablica.tychNieCzysc.Except(templist).ToList();
+					//GD.Print("", string.Join(", ", tablica.tychNieCzysc));
+					//GD.Print("", string.Join(", ", duplicates));
+					//if (duplicates.Contains(this.sekwencja[this.sekwencja.Count-1])){
+						//tablica.tychNieCzysc.Add(this.sekwencja[this.sekwencja.Count-1]);
+					//}
+					//var duplicates = tablica.tychNieCzysc.GroupBy(x => x).Where(group => group.Count() > 1).Select(group => group.Key);
+					
+					foreach (var item in duplicates){
+						tablica.tychNieCzysc.Add(item);
+					}
+					
+					GD.Print(this.sekwencja[this.sekwencja.Count-1]);
+					GD.Print("", string.Join(", ", tablica.tychNieCzysc));
 					this.sekwencja.RemoveAt(this.sekwencja.Count - 1);
 					
 					if (this.sekwencja.Count == 0){
@@ -265,12 +299,18 @@ public partial class straznik : Node2D
 							////this.poruszaj();
 						//}
 					//}
+					var duplicates = tablica.tychNieCzysc.GroupBy(x => x).Where(group => group.Count() > 1).Select(group => group.Key);
+					
 					foreach (var item in tablica.straznicy){
 						if (this.sekwencja.Count != 0){
 							if (item.Name == this.sekwencja.Last()){
 								
 							if (item.sekwencja.Count() == 0){
 								tablica.tychNieCzysc = tablica.tychNieCzysc.Except(this.sekwencja).ToList();
+								foreach (var item1 in duplicates){
+									tablica.tychNieCzysc.Add(item1);
+									
+								}
 								this.sekwencja.Clear();
 								var sprite = GetNode<Sprite2D>("Sprite2D");
 								var obrazek1 = GD.Load<Texture2D>("res://asstets/placeholder_straznik.png");
@@ -284,6 +324,7 @@ public partial class straznik : Node2D
 								
 								tablica.tychNieCzysc = tablica.tychNieCzysc.Except(this.sekwencja).ToList();
 								tablica.tychNieCzysc = tablica.tychNieCzysc.Except(item.sekwencja).ToList();
+								
 								
 								this.sekwencja.Clear();
 								var sprite = GetNode<Sprite2D>("Sprite2D");
@@ -300,6 +341,9 @@ public partial class straznik : Node2D
 								//var obrazek2 = GD.Load<Texture2D>("res://asstets/placeholder_straznik.png");
 								sprite2.Texture = obrazek1;
 									
+								foreach (var item1 in duplicates){
+									tablica.tychNieCzysc.Add(item1);
+								}
 									
 								for (int pole_i = 0; pole_i<tablica.table.Length; pole_i++)
 								{
@@ -332,10 +376,34 @@ public partial class straznik : Node2D
 					//if (tablica.szukajacy.Count > 0){
 						//tablica.szukajacy.RemoveAt(0);
 					//}
+					
+					
 				}
+				
+				GD.Print("to ja! strażnik z "+this.Name);
+				GD.Print("zostawiam po sobie tychnieczysc w takim stanie: ");
+				GD.Print("", string.Join(", ", tablica.tychNieCzysc));
+				
+				for (int pole_i = 0; pole_i<tablica.table.Length; pole_i++)
+			{
+				for (int pole_y = 0; pole_y<tablica.table[pole_i].Length; pole_y++){
+					//GD.Print(tablica.table[pole_i][pole_y]);
+					if (tablica.table[pole_i][pole_y] == 0){
+						if (tablica.tychNieCzysc.Contains("pole"+pole_i+pole_y)){
+							var pole = GetNode<Sprite2D>("/root/Node2D/pole"+pole_i+pole_y+"/Sprite2D");
+							var obrazek = GD.Load<Texture2D>("res://asstets/puste_klik.png");
+							pole.Texture = obrazek;
+						} else {
+							var pole = GetNode<Sprite2D>("/root/Node2D/pole"+pole_i+pole_y+"/Sprite2D");
+							pole.Texture = null;
+						}
+					}
+				}
+						
+			}
 			}
 			
 			
-		
+	
 	}
 }

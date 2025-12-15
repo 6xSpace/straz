@@ -53,6 +53,7 @@ public partial class straznik : Node2D
 	
 	public void _on_area_2d_input_event(Node viewport, InputEvent @event, long shapeIdx)
 	{
+		
 		//GD.Print(@event);
 		if (@event is InputEventMouseButton mb)
 		{
@@ -83,7 +84,10 @@ public partial class straznik : Node2D
 						sprite.Texture = obrazek;
 						
 						var timer = GetNode<Timer>("/root/Node2D/Timer");
-						timer.Stop();
+						if (!timer.IsStopped()){
+							timer.Stop();
+							
+						}
 						
 						tablica.wylaczKlikanie = false;
 					} else {
@@ -95,7 +99,11 @@ public partial class straznik : Node2D
 						sprite.Texture = obrazek;
 						
 						var timer = GetNode<Timer>("/root/Node2D/Timer");
-						timer.Start();
+						var tata = GetNode<Main>("/root/Node2D");
+						if (!tata.paused){
+							timer.Start();
+							
+						}
 						
 						tablica.wylaczKlikanie = true;
 						
@@ -225,7 +233,10 @@ public partial class straznik : Node2D
 					tablica.table[ja_i][ja_y] = tablica.table[cel_i][cel_y];
 					tablica.table[cel_i][cel_y] = tempID;
 					
-					tablica.tychNieCzysc.RemoveAt(this.sekwencja.Count - 1);
+					//tablica.tychNieCzysc.RemoveAt(this.sekwencja.Count - 1);
+					List<string> templist = new List<string>();
+					templist.Add(this.sekwencja[(this.sekwencja.Count - 1)]);
+					tablica.tychNieCzysc = tablica.tychNieCzysc.Except(templist).ToList();
 					this.sekwencja.RemoveAt(this.sekwencja.Count - 1);
 					
 					if (this.sekwencja.Count == 0){

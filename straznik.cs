@@ -114,17 +114,17 @@ public partial class straznik : Node2D
 		}
 	}
 	public int[][] pathfinding(dynamic obszar){
-		GD.Print(this.Name);
+		//GD.Print(this.Name);
 		string temp = this.Name;
 		char iii = temp[4];
 		string ii = Convert.ToString(iii);
 		int i = Convert.ToInt32(ii);
-		GD.Print(iii);
-		GD.Print(i);
+		//GD.Print(iii);
+		//GD.Print(i);
 		char yyy = temp[5];
 		string yy = Convert.ToString(yyy);
 		int y = Convert.ToInt32(yy);
-		GD.Print(y);
+		//GD.Print(y);
 		malyPathfinding(obszar, i, y, 1);
 
 		for (int pole_i = 0; pole_i<obszar.Length; pole_i++)
@@ -174,7 +174,7 @@ public partial class straznik : Node2D
 	}
 	
 	public void otrzymajSekwencje(List<string> sekwencja){
-		GD.Print(string.Join(", ", sekwencja));
+		//GD.Print(string.Join(", ", sekwencja));
 		foreach (var item in sekwencja){
 			this.sekwencja.Add(item);
 		}
@@ -188,8 +188,8 @@ public partial class straznik : Node2D
 		
 		
 		//GD.Print(this.sekwencja);
-		GD.Print("straznik z "+this.Name);
-		GD.Print("", string.Join(", ", this.sekwencja));
+		//GD.Print("straznik z "+this.Name);
+		//GD.Print("", string.Join(", ", this.sekwencja));
 		if (this.sekwencja.Count > 0){
 			
 			var tablica = GetNode<Board>("/root/Node2D/tableNode");
@@ -269,8 +269,8 @@ public partial class straznik : Node2D
 						tablica.tychNieCzysc.Add(item);
 					}
 					
-					GD.Print(this.sekwencja[this.sekwencja.Count-1]);
-					GD.Print("", string.Join(", ", tablica.tychNieCzysc));
+					//GD.Print(this.sekwencja[this.sekwencja.Count-1]);
+					//GD.Print("", string.Join(", ", tablica.tychNieCzysc));
 					this.sekwencja.RemoveAt(this.sekwencja.Count - 1);
 					
 					if (this.sekwencja.Count == 0){
@@ -380,9 +380,9 @@ public partial class straznik : Node2D
 					
 				}
 				
-				GD.Print("to ja! strażnik z "+this.Name);
-				GD.Print("zostawiam po sobie tychnieczysc w takim stanie: ");
-				GD.Print("", string.Join(", ", tablica.tychNieCzysc));
+				//GD.Print("to ja! strażnik z "+this.Name);
+				//GD.Print("zostawiam po sobie tychnieczysc w takim stanie: ");
+				//GD.Print("", string.Join(", ", tablica.tychNieCzysc));
 				
 				for (int pole_i = 0; pole_i<tablica.table.Length; pole_i++)
 			{

@@ -20,7 +20,7 @@ public partial class Board : Node2D
 	//[0,0,0,0,0,0,0,0,0,0,],
 	//[0,0,0,0,0,0,0,0,0,0,]] ;
 	[[3001,3001,3001,3001,3001,3001,3001,3001,3001,3001,],
-	[3001,0,0,0,0,0,0,0,0,3001,],
+	[3001,3004,0,0,0,0,0,0,0,3001,],
 	[3001,0,0,0,0,0,0,0,0,3001,],
 	[3001,0,0,0,0,0,0,0,0,3001,],
 	[3001,0,0,0,0,0,3003,0,0,3001,],
@@ -29,7 +29,7 @@ public partial class Board : Node2D
 	[3001,0,0,0,0,0,0,0,0,3001,],
 	[3001,0,3002,0,0,0,0,0,0,3001,],
 	[3001,3001,3001,3001,3001,3001,3001,3001,3001,3001,]] ;
-	//0-puste, 3001-domek, 3002-straznik, 3003-bandyta
+	//0-puste, 3001-domek, 3002-straznik, 3003-bandyta, 3004-cywil
 	
 	public int[][] tablicaSciezki = 
 	[[0,0,0,0,0,0,0,0,0,0,],
@@ -130,6 +130,15 @@ public partial class Board : Node2D
 					//GD.Print(node);
 					var domek1 = GD.Load<PackedScene>("res://bandyta.tscn");
 					var domeczek = domek1.Instantiate<Bandyta>();
+					domeczek.Name = "pole"+i+y;
+					node.AddChild(domeczek);
+					//GD.Print(domeczek);
+					domeczek.Position = new Vector2(30*i, 30*y);
+					
+				} else if (this.table[i][y] == 3004){
+					//GD.Print(node);
+					var domek1 = GD.Load<PackedScene>("res://Cywil.tscn");
+					var domeczek = domek1.Instantiate<Cywil>();
 					domeczek.Name = "pole"+i+y;
 					node.AddChild(domeczek);
 					//GD.Print(domeczek);

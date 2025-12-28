@@ -23,7 +23,7 @@ public partial class PustePole : Node2D
 		
 		var tablica = GetNode<Board>("/root/Node2D/tableNode");
 		//GD.Print(tablica);
-		GD.Print(string.Join(", ", tablica.tychNieCzysc));
+		//GD.Print(string.Join(", ", tablica.tychNieCzysc));
 		
 		for (int pole_i = 0; pole_i<tablica.table.Length; pole_i++)
 			{

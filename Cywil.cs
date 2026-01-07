@@ -28,8 +28,13 @@ public partial class Cywil : Node2D
 		}
 		//GD.Print("", string.Join(", ", this.cele));
 		Random rand = new Random();
-		string[] cel = [cele.ElementAt(rand.Next(0, cele.Count)).Key, cele.ElementAt(rand.Next(0, cele.Count)).Key];
-		GD.Print(cel[0]);
+		string[] cel = [cele.ElementAt(rand.Next(0, cele.Count-1)).Key, cele.ElementAt(rand.Next(0, cele.Count-1)).Value];
+		GD.Print(cel[1]);
+		GD.Print("", string.Join(", ", cele));
+		
+		var pole_cel = GetNode<Sprite2D>("/root/Node2D/"+cel[1]+"/Sprite2D");
+		var obrazek = GD.Load<Texture2D>("res://asstets/placeholder_domek_cel.png");
+		pole_cel.Texture = obrazek;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -73,7 +78,7 @@ public partial class Cywil : Node2D
 	
 	public void malyPathfinding(dynamic obszar, int pole_i, int pole_y, int licznik){
 		GD.Print(pole_i);
-		if (obszar.Length > pole_i+2 && obszar[0].Length > pole_y+1 && pole_i > 0 && pole_y >0){
+		if (obszar.Length > pole_i+1 && obszar[0].Length > pole_y+1 && pole_i > 0 && pole_y >0){
 			if (obszar[pole_i+1][pole_y] == 0 || (obszar[pole_i+1][pole_y] > licznik && obszar[pole_i+1][pole_y] < 3000)){
 			obszar[pole_i+1][pole_y] = licznik;
 			} 
@@ -100,7 +105,7 @@ public partial class Cywil : Node2D
 				}
 				catch (ArgumentException)
 				{
-					GD.Print("taki klucz już jest");
+					//GD.Print("taki klucz już jest");
 				}
 				
 			} 
@@ -113,7 +118,7 @@ public partial class Cywil : Node2D
 				}
 				catch (ArgumentException)
 				{
-					GD.Print("taki klucz już jest");
+					//GD.Print("taki klucz już jest");
 				}
 			} 
 			if (obszar[pole_i][pole_y+1] == 3001){
@@ -125,7 +130,7 @@ public partial class Cywil : Node2D
 				}
 				catch (ArgumentException)
 				{
-					GD.Print("taki klucz już jest");
+					//GD.Print("taki klucz już jest");
 				}
 			} 
 			if (obszar[pole_i][pole_y-1] == 3001){
@@ -137,7 +142,7 @@ public partial class Cywil : Node2D
 				}
 				catch (ArgumentException)
 				{
-					GD.Print("taki klucz już jest");
+					//GD.Print("taki klucz już jest");
 				}
 			}
 			

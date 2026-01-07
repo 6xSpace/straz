@@ -60,6 +60,9 @@ public partial class Main : Node2D
 		napis.Text = "Tura "+tura;
 		
 		var table = GetNode<Board>("tableNode");
+		if (tura == 1){
+			table.dodajCywila();
+		}
 		table.tura();
 	}
 	

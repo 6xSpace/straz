@@ -22,7 +22,7 @@ public partial class Board : Node2D
 	[[3001,3001,3001,3001,3001,3001,3001,3001,3001,3001,],
 	[3001,0,0,0,0,0,0,0,0,3001,],
 	[3001,0,0,0,0,0,0,0,0,3001,],
-	[3001,0,0,3004,0,0,0,0,0,3001,],
+	[3001,0,0,0,0,0,0,0,0,3001,],
 	[3001,0,0,0,0,0,3003,0,0,3001,],
 	[3001,0,0,0,0,0,0,0,0,3001,],
 	[3001,0,0,0,0,3002,0,0,0,3001,],
@@ -67,6 +67,58 @@ public partial class Board : Node2D
 		this.table[y][x] = 3003;
 	}
 	
+	public void dodajCywila(){
+		Random rand = new Random();
+		List<string> starty = new List<string>();
+		for (int i = 0; i<this.table.Length; i++)
+		{
+			for (int y = 0; y<this.table[i].Length; y++){
+				if (this.table[i][y] == 3001){
+						//GD.Print(this.table[0].Length);
+						if (this.table.Length > i+1){
+							if (this.table[i+1][y] == 0){
+							starty.Add("pole"+(i+1)+y);
+						}
+						}
+						if (i > 0){
+							if (this.table[i-1][y] == 0){
+							starty.Add("pole"+(i-1)+y);
+						}
+						}
+						if (this.table[0].Length > y+1){
+							if (this.table[i][y+1] == 0){
+							starty.Add("pole"+i+(y+1));
+						}
+						}
+						if (y>0){
+							if (this.table[i][y-1] == 0){
+							starty.Add("pole"+i+(y-1));
+						}
+						}
+						
+					}
+				}
+			}
+		//GD.Print("TOOOO!");
+		GD.Print("", string.Join(", ", starty));
+		string start = starty[rand.Next(0, starty.Count)];
+		GD.Print(start);
+		GD.Print(start[5]);
+		GD.Print(start[4]);
+		int temp1 = Int32.Parse(Convert.ToString(start[4]));
+		int temp2 = Int32.Parse(Convert.ToString(start[5]));
+		
+		this.table[temp1][temp2] = 3004;
+		var pole = GetNode<PustePole>("/root/Node2D/"+start);
+		pole.QueueFree();
+		var domek1 = GD.Load<PackedScene>("res://Cywil.tscn");
+		var domeczek = domek1.Instantiate<Cywil>();
+		domeczek.Name = "pole"+temp1+temp2;
+		this.AddChild(domeczek);
+		//GD.Print(domeczek);
+		domeczek.Position = new Vector2(30*temp1, 30*temp2);
+		
+	}
 	public void wypisz(){
 		foreach(var i in this.table)
 		{
@@ -121,7 +173,7 @@ public partial class Board : Node2D
 					domeczek.Position = new Vector2(30*i, 30*y);
 					
 					this.straznicy.Add(domeczek);
-					GD.Print("", string.Join(", ", this.straznicy));
+					//GD.Print("", string.Join(", ", this.straznicy));
 					//foreach (var straznik in this.straznicy){
 						//straznik.poruszaj();
 					//}

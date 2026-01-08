@@ -19,6 +19,8 @@ public partial class Cywil : Node2D
 	[0,0,0,0,0,0,0,0,0,0,],
 	[0,0,0,0,0,0,0,0,0,0,],
 	[0,0,0,0,0,0,0,0,0,0,]] ;
+	
+	string[] cel;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -30,9 +32,9 @@ public partial class Cywil : Node2D
 		//GD.Print("", string.Join(", ", this.cele));
 		Random rand = new Random();
 		int randtemp = rand.Next(0, cele.Count-1);
-		string[] cel = [cele.ElementAt(randtemp).Key, cele.ElementAt(randtemp).Value];
-		GD.Print(cel[1]);
-		GD.Print(cel[0]);
+		this.cel = [cele.ElementAt(randtemp).Key, cele.ElementAt(randtemp).Value];
+		GD.Print(this.cel[1]);
+		GD.Print(this.cel[0]);
 		//GD.Print("", string.Join(", ", cele));
 		
 		var pole_cel = GetNode<Sprite2D>("/root/Node2D/"+cel[1]+"/Sprite2D");
@@ -40,14 +42,14 @@ public partial class Cywil : Node2D
 		pole_cel.Texture = obrazek;
 		
 		
-		string temp = cel[0];
+		string temp = this.cel[0];
 		char iii = temp[4];
 		string ii = Convert.ToString(iii);
 		int i = Convert.ToInt32(ii);
 		char yyy = temp[5];
 		string yy = Convert.ToString(yyy);
 		int y = Convert.ToInt32(yy);
-		sekwencja.Add(cel[0]);
+		sekwencja.Add(this.cel[0]);
 		GD.Print(ii, yy);
 		this.zrobSekwencje(this.tablicaSciezki, i, y, this.tablicaSciezki[i][y]);
 		GD.Print("", string.Join(", ", sekwencja));
@@ -220,4 +222,63 @@ public partial class Cywil : Node2D
 		}
 		
 	}
+	
+	public void poruszaj(){
+		if (this.sekwencja.Count > 0){
+			
+			var tablica = GetNode<Board>("/root/Node2D/tableNode");
+			
+			string temp = this.Name;
+			char iii = temp[4];
+			string ii = Convert.ToString(iii);
+			int ja_i = Convert.ToInt32(ii);
+			char yyy = temp[5];
+			string yy = Convert.ToString(yyy);
+			int ja_y = Convert.ToInt32(yy);
+			
+			temp = this.sekwencja.Last();
+			iii = temp[4];
+			ii = Convert.ToString(iii);
+			int cel_i = Convert.ToInt32(ii);
+			yyy = temp[5];
+			yy = Convert.ToString(yyy);
+			int cel_y = Convert.ToInt32(yy);
+			
+			if (tablica.table[cel_i][cel_y] != 3002){
+				var cel = GetNode<PustePole>("/root/Node2D/"+this.sekwencja.Last());
+				//var obrazek = GetNode<Sprite2D>("/root/Node2D/"+this.sekwencja.Last()+"/Sprite2D");
+				//obrazek.Texture = null;
+					
+				//var tablica = GetNode<Board>("/root/Node2D/tableNode");
+				var tempPosition = this.Position;
+				var tempName = this.Name;
+				var tempName2 = cel.Name;
+					
+				this.Position = cel.Position;
+				cel.Position = tempPosition;
+					
+				cel.Name = "chuj";
+				this.Name = tempName2;
+				cel.Name = tempName;
+				//GD.Print(this.Name);
+					
+				var tempID = tablica.table[ja_i][ja_y];
+				tablica.table[ja_i][ja_y] = tablica.table[cel_i][cel_y];
+				tablica.table[cel_i][cel_y] = tempID;
+					
+					
+				this.sekwencja.RemoveAt(this.sekwencja.Count - 1);
+					
+				
+				//tablica.wypisz();
+				}
+			} else {
+				var pole_cel = GetNode<Sprite2D>("/root/Node2D/"+cel[1]+"/Sprite2D");
+				var obrazek = GD.Load<Texture2D>("res://asstets/placeholder_domek.png");
+				pole_cel.Texture = obrazek;
+				var tablica = GetNode<Board>("/root/Node2D/tableNode");
+				tablica.cywile.Remove(this);
+				this.QueueFree();
+			}
+		}
 }

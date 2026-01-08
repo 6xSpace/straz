@@ -51,6 +51,8 @@ public partial class Board : Node2D
 	
 	public List<straznik> straznicy = new List<straznik>();
 	
+	public List<Cywil> cywile = new List<Cywil>();
+	
 	public void dodajDomek(int x, int y){
 		this.table[y][x] = 3001;
 		//GD.Print(this.table);
@@ -115,6 +117,7 @@ public partial class Board : Node2D
 		var domeczek = domek1.Instantiate<Cywil>();
 		domeczek.Name = "pole"+temp1+temp2;
 		this.AddChild(domeczek);
+		this.cywile.Add(domeczek);
 		//GD.Print(domeczek);
 		domeczek.Position = new Vector2(30*temp1, 30*temp2);
 		
@@ -138,6 +141,10 @@ public partial class Board : Node2D
 		//GD.Print("chuj");
 		foreach (var straznik in this.straznicy){
 			straznik.poruszaj();
+		}
+		
+		foreach (var cywil in this.cywile){
+			cywil.poruszaj();
 		}
 	}
 	

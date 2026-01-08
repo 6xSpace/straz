@@ -6,6 +6,7 @@ using System.Linq;
 
 public partial class Cywil : Node2D
 {
+	List<string> sekwencja = new List<string>();
 	Dictionary<string, string> cele = new Dictionary<string, string>();
 	public int[][] tablicaSciezki = 
 	[[0,0,0,0,0,0,0,0,0,0,],
@@ -28,13 +29,28 @@ public partial class Cywil : Node2D
 		}
 		//GD.Print("", string.Join(", ", this.cele));
 		Random rand = new Random();
-		string[] cel = [cele.ElementAt(rand.Next(0, cele.Count-1)).Key, cele.ElementAt(rand.Next(0, cele.Count-1)).Value];
+		int randtemp = rand.Next(0, cele.Count-1);
+		string[] cel = [cele.ElementAt(randtemp).Key, cele.ElementAt(randtemp).Value];
 		GD.Print(cel[1]);
-		GD.Print("", string.Join(", ", cele));
+		GD.Print(cel[0]);
+		//GD.Print("", string.Join(", ", cele));
 		
 		var pole_cel = GetNode<Sprite2D>("/root/Node2D/"+cel[1]+"/Sprite2D");
 		var obrazek = GD.Load<Texture2D>("res://asstets/placeholder_domek_cel.png");
 		pole_cel.Texture = obrazek;
+		
+		
+		string temp = cel[0];
+		char iii = temp[4];
+		string ii = Convert.ToString(iii);
+		int i = Convert.ToInt32(ii);
+		char yyy = temp[5];
+		string yy = Convert.ToString(yyy);
+		int y = Convert.ToInt32(yy);
+		sekwencja.Add(cel[0]);
+		GD.Print(ii, yy);
+		this.zrobSekwencje(this.tablicaSciezki, i, y, this.tablicaSciezki[i][y]);
+		GD.Print("", string.Join(", ", sekwencja));
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -52,6 +68,47 @@ public partial class Cywil : Node2D
 		}
 		this.pathfinding(this.tablicaSciezki);
 		GD.Print(this.tablicaSciezki);
+	}
+	
+	public void zrobSekwencje(dynamic obszar, int pole_i, int pole_y, int licznik){ //1 do 1 funkcja szukaj z puste pole
+		bool gdziesWeszlo = false;
+		if (pole_i+1 < obszar.Length && !gdziesWeszlo){
+			GD.Print(licznik);
+			if (licznik >= 0 && obszar[pole_i+1][pole_y] == licznik-1){
+				//GD.Print("WCHODZI22222");
+				int temp = pole_i+1;
+				sekwencja.Add("pole"+temp+pole_y);
+				zrobSekwencje(obszar, pole_i+1, pole_y, licznik-1);
+				gdziesWeszlo = true;
+			}
+		}
+		if (pole_i > 0 && !gdziesWeszlo){
+			if (licznik >= 0 && obszar[pole_i-1][pole_y] == licznik-1){
+				int temp = pole_i-1;
+				sekwencja.Add("pole"+temp+pole_y);
+				zrobSekwencje(obszar, pole_i-1, pole_y, licznik-1);
+				gdziesWeszlo = true;
+			}
+		}
+		if (pole_y+1 < obszar[0].Length && !gdziesWeszlo){
+			if (licznik >= 0 && obszar[pole_i][pole_y+1] == licznik-1){
+				int temp = pole_y+1;
+				sekwencja.Add("pole"+pole_i+temp);
+				zrobSekwencje(obszar, pole_i, pole_y+1, licznik-1);
+				gdziesWeszlo = true;
+			}
+		}
+		if (pole_y > 0 && !gdziesWeszlo){
+			if (licznik >= 0 && obszar[pole_i][pole_y-1] == licznik-1){
+				int temp = pole_y-1;
+				sekwencja.Add("pole"+pole_i+temp);
+				zrobSekwencje(obszar, pole_i, pole_y-1, licznik-1);
+				gdziesWeszlo = true;
+			}
+		}
+		
+		
+		
 	}
 	
 	public int[][] pathfinding(dynamic obszar){

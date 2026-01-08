@@ -60,10 +60,11 @@ public partial class Main : Node2D
 		napis.Text = "Tura "+tura;
 		
 		var table = GetNode<Board>("tableNode");
+		table.tura();
 		if (tura == 1){
 			table.dodajCywila();
 		}
-		table.tura();
+		
 	}
 	
 	public void _on_area_2d_input_event(Node viewport, InputEvent @event, long shapeIdx){

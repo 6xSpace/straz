@@ -75,7 +75,7 @@ public partial class Cywil : Node2D
 	public void zrobSekwencje(dynamic obszar, int pole_i, int pole_y, int licznik){ //1 do 1 funkcja szukaj z puste pole
 		bool gdziesWeszlo = false;
 		if (pole_i+1 < obszar.Length && !gdziesWeszlo){
-			GD.Print(licznik);
+			//GD.Print(licznik);
 			if (licznik >= 0 && obszar[pole_i+1][pole_y] == licznik-1){
 				//GD.Print("WCHODZI22222");
 				int temp = pole_i+1;
@@ -136,7 +136,7 @@ public partial class Cywil : Node2D
 	}
 	
 	public void malyPathfinding(dynamic obszar, int pole_i, int pole_y, int licznik){
-		GD.Print(pole_i);
+		//GD.Print(pole_i);
 		if (obszar.Length > pole_i+1 && obszar[0].Length > pole_y+1 && pole_i > 0 && pole_y >0){
 			if (obszar[pole_i+1][pole_y] == 0 || (obszar[pole_i+1][pole_y] > licznik && obszar[pole_i+1][pole_y] < 3000)){
 			obszar[pole_i+1][pole_y] = licznik;

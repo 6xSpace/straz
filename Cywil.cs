@@ -155,7 +155,7 @@ public partial class Cywil : Node2D
 			//GD.Print(obszar.Length);
 			//GD.Print(pole_i);
 			
-			if (obszar[pole_i+1][pole_y] == 3001){
+			if (obszar[pole_i+1][pole_y] == 3001 && licznik > 3){
 				try{
 					string temp1 = "pole"+pole_i+pole_y;
 					string temp2 = "pole"+(pole_i+1)+pole_y;
@@ -168,7 +168,7 @@ public partial class Cywil : Node2D
 				}
 				
 			} 
-			if (obszar[pole_i-1][pole_y] == 3001){
+			if (obszar[pole_i-1][pole_y] == 3001 && licznik > 3){
 				try{
 					string temp1 = "pole"+pole_i+pole_y;
 					string temp2 = "pole"+(pole_i-1)+pole_y;
@@ -180,7 +180,7 @@ public partial class Cywil : Node2D
 					//GD.Print("taki klucz już jest");
 				}
 			} 
-			if (obszar[pole_i][pole_y+1] == 3001){
+			if (obszar[pole_i][pole_y+1] == 3001 && licznik > 3){
 				try{
 					string temp1 = "pole"+pole_i+pole_y;
 					string temp2 = "pole"+pole_i+(pole_y+1);
@@ -192,7 +192,7 @@ public partial class Cywil : Node2D
 					//GD.Print("taki klucz już jest");
 				}
 			} 
-			if (obszar[pole_i][pole_y-1] == 3001){
+			if (obszar[pole_i][pole_y-1] == 3001 && licznik > 3){
 				try{
 					string temp1 = "pole"+pole_i+pole_y;
 					string temp2 = "pole"+pole_i+(pole_y-1);
@@ -277,7 +277,7 @@ public partial class Cywil : Node2D
 				var obrazek = GD.Load<Texture2D>("res://asstets/placeholder_domek.png");
 				pole_cel.Texture = obrazek;
 				var tablica = GetNode<Board>("/root/Node2D/tableNode");
-				tablica.cywile.Remove(this);
+				tablica.cywileDeathList.Add(this);
 				
 				string temp = this.Name;
 				char iii = temp[4];

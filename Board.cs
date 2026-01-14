@@ -53,6 +53,8 @@ public partial class Board : Node2D
 	
 	public List<Cywil> cywile = new List<Cywil>();
 	
+	public List<Cywil> cywileDeathList = new List<Cywil>();
+	
 	public void dodajDomek(int x, int y){
 		this.table[y][x] = 3001;
 		//GD.Print(this.table);
@@ -146,6 +148,10 @@ public partial class Board : Node2D
 		
 		foreach (var cywil in this.cywile){
 			cywil.poruszaj();
+		}
+		
+		foreach (var cywil in this.cywileDeathList){
+			this.cywile.Remove(cywil);
 		}
 	}
 	

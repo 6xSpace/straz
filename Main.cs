@@ -14,7 +14,7 @@ public partial class Main : Node2D
 		table.Name = "tableNode";
 		//table.tychNieCzysc.Add("chuj");
 		AddChild(table);
-		table.dodajDomek(2, 1);
+		//table.dodajDomek(2, 1);
 		table.dodajDomek(2, 2);
 		table.dodajDomek(1, 2);
 		
@@ -61,7 +61,7 @@ public partial class Main : Node2D
 		
 		var table = GetNode<Board>("tableNode");
 		table.tura();
-		if (tura == 1){
+		if (tura%5 == 0){
 			table.dodajCywila();
 		}
 		

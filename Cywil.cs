@@ -27,14 +27,14 @@ public partial class Cywil : Node2D
 		this.szukaj();
 		foreach(var chuj in this.tablicaSciezki)
 		{
-			GD.Print("", string.Join(", ", chuj));
+			//GD.Print("", string.Join(", ", chuj));
 		}
 		//GD.Print("", string.Join(", ", this.cele));
 		Random rand = new Random();
 		int randtemp = rand.Next(0, cele.Count-1);
 		this.cel = [cele.ElementAt(randtemp).Key, cele.ElementAt(randtemp).Value];
-		GD.Print(this.cel[1]);
-		GD.Print(this.cel[0]);
+		//GD.Print(this.cel[1]);
+		//GD.Print(this.cel[0]);
 		//GD.Print("", string.Join(", ", cele));
 		
 		var pole_cel = GetNode<Sprite2D>("/root/Node2D/"+cel[1]+"/Sprite2D");
@@ -50,9 +50,9 @@ public partial class Cywil : Node2D
 		string yy = Convert.ToString(yyy);
 		int y = Convert.ToInt32(yy);
 		sekwencja.Add(this.cel[0]);
-		GD.Print(ii, yy);
+		//GD.Print(ii, yy);
 		this.zrobSekwencje(this.tablicaSciezki, i, y, this.tablicaSciezki[i][y]);
-		GD.Print("", string.Join(", ", sekwencja));
+		//GD.Print("", string.Join(", ", sekwencja));
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -69,7 +69,7 @@ public partial class Cywil : Node2D
 			}
 		}
 		this.pathfinding(this.tablicaSciezki);
-		GD.Print(this.tablicaSciezki);
+		//GD.Print(this.tablicaSciezki);
 	}
 	
 	public void zrobSekwencje(dynamic obszar, int pole_i, int pole_y, int licznik){ //1 do 1 funkcja szukaj z puste pole
@@ -278,7 +278,25 @@ public partial class Cywil : Node2D
 				pole_cel.Texture = obrazek;
 				var tablica = GetNode<Board>("/root/Node2D/tableNode");
 				tablica.cywile.Remove(this);
+				
+				string temp = this.Name;
+				char iii = temp[4];
+				string ii = Convert.ToString(iii);
+				int ja_i = Convert.ToInt32(ii);
+				char yyy = temp[5];
+				string yy = Convert.ToString(yyy);
+				int ja_y = Convert.ToInt32(yy);
+				
+				tablica.table[ja_i][ja_y] = 0;
 				this.QueueFree();
+				
+				var node = GetNode<Node2D>("/root/Node2D");
+				var domek1 = GD.Load<PackedScene>("res://puste_pole.tscn");
+				var domeczek = domek1.Instantiate<PustePole>();
+				domeczek.Name = "pole"+ja_i+ja_y;
+				node.AddChild(domeczek);
+				//GD.Print(domeczek);
+				domeczek.Position = new Vector2(30*ja_i, 30*ja_y);
 			}
 		}
 }

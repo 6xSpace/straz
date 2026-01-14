@@ -102,11 +102,11 @@ public partial class Board : Node2D
 				}
 			}
 		//GD.Print("TOOOO!");
-		GD.Print("", string.Join(", ", starty));
+		//GD.Print("", string.Join(", ", starty));
 		string start = starty[rand.Next(0, starty.Count)];
-		GD.Print(start);
-		GD.Print(start[5]);
-		GD.Print(start[4]);
+		//GD.Print(start);
+		//GD.Print(start[5]);
+		//GD.Print(start[4]);
 		int temp1 = Int32.Parse(Convert.ToString(start[4]));
 		int temp2 = Int32.Parse(Convert.ToString(start[5]));
 		
@@ -139,6 +139,7 @@ public partial class Board : Node2D
 	
 	public void tura(){
 		//GD.Print("chuj");
+		this.wypisz();
 		foreach (var straznik in this.straznicy){
 			straznik.poruszaj();
 		}

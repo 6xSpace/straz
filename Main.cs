@@ -15,11 +15,20 @@ public partial class Main : Node2D
 		//table.tychNieCzysc.Add("chuj");
 		AddChild(table);
 		//table.dodajDomek(2, 1);
-		table.dodajDomek(2, 2);
-		table.dodajDomek(1, 2);
+		//table.dodajDomek(2, 2);
+		//table.dodajDomek(1, 2);
 		
 		table.wypisz();
 		table.generuj(this);
+		
+		//foreach(var i in table.table)
+		//{
+			//foreach(var y in i){
+				//GD.Print(y.ToString());
+			//}
+			//GD.Print("", string.Join(", ", i));
+			//
+		//}
 		
 		var napis = GetNode<RichTextLabel>("napisTura");
 		napis.Text = "Tura 0";
@@ -61,7 +70,7 @@ public partial class Main : Node2D
 		
 		var table = GetNode<Board>("tableNode");
 		table.tura();
-		if (tura%5 == 0){
+		if (tura%3 == 0){
 			table.dodajCywila();
 		}
 		

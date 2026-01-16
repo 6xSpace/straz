@@ -28,10 +28,10 @@ public partial class Cywil : Node2D
 		this.tablicaSciezki = tablica.tablicaSciezki.Clone() as int[][];
 		
 		this.szukaj();
-		foreach(var chuj in this.tablicaSciezki)
-		{
-			GD.Print("", string.Join(", ", chuj));
-		}
+		//foreach(var chuj in this.tablicaSciezki)
+		//{
+			//GD.Print("", string.Join(", ", chuj));
+		//}
 		//GD.Print("", string.Join(", ", this.cele));
 		//GD.Print(cele.Count);
 		
@@ -66,7 +66,7 @@ public partial class Cywil : Node2D
 		sekwencja.Add(this.cel[0]);
 		//GD.Print(ii, yy);
 		this.zrobSekwencje(this.tablicaSciezki, i, y, this.tablicaSciezki[i][y]);
-		GD.Print("", string.Join(", ", sekwencja));
+		//GD.Print("", string.Join(", ", sekwencja));
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -87,10 +87,10 @@ public partial class Cywil : Node2D
 				}
 			}
 		}
-		foreach(var chuj in this.tablicaSciezki)
-		{
-			GD.Print("", string.Join(", ", chuj));
-		}
+		//foreach(var chuj in this.tablicaSciezki)
+		//{
+			//GD.Print("", string.Join(", ", chuj));
+		//}
 		this.pathfinding(this.tablicaSciezki);
 		
 	}
@@ -137,7 +137,7 @@ public partial class Cywil : Node2D
 	}
 	
 	public int[][] pathfinding(dynamic obszar){
-		GD.Print(this.Name);
+		//GD.Print(this.Name);
 		string temp = this.Name;
 		char iii = temp[4];
 		string ii = Convert.ToString(iii);
@@ -297,7 +297,7 @@ public partial class Cywil : Node2D
 				
 				//tablica.wypisz();
 				} else if (tablica.table[cel_i][cel_y] == 3004){
-					GD.Print("WESZŁO!!!!!!");
+					//GD.Print("WESZŁO!!!!!!");
 					//var tablica = GetNode<Board>("/root/Node2D/tableNode");
 					this.tablicaSciezki = tablica.tablicaSciezki.Clone() as int[][];
 					//this.tablicaSciezki[cel_i][cel_y] = 9999;
@@ -314,7 +314,7 @@ public partial class Cywil : Node2D
 					sekwencja.Add(this.cel[0]);
 					//GD.Print(ii, yy);
 					this.zrobSekwencje(this.tablicaSciezki, i1, y1, this.tablicaSciezki[i1][y1]);
-					GD.Print("", string.Join(", ", this.sekwencja));
+					//GD.Print("", string.Join(", ", this.sekwencja));
 					//var cel = GetNode<PustePole>("/root/Node2D/"+this.sekwencja.Last());
 					////var obrazek = GetNode<Sprite2D>("/root/Node2D/"+this.sekwencja.Last()+"/Sprite2D");
 					////obrazek.Texture = null;

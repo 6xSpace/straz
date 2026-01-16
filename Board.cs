@@ -137,7 +137,8 @@ public partial class Board : Node2D
 				}
 			}
 		//GD.Print("TOOOO!");
-		//GD.Print("", string.Join(", ", starty));
+		GD.Print("", string.Join(", ", starty));
+		this.wypisz();
 		string start = starty[rand.Next(0, starty.Count)];
 		//GD.Print(start);
 		//GD.Print(start[5]);

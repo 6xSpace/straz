@@ -163,11 +163,11 @@ public partial class Board : Node2D
 		
 		this.AddChild(domeczek);
 		this.cywile.Add(domeczek);
-		GD.Print("''''''''''");
-		GD.Print(domeczek.Name);
+		//GD.Print("''''''''''");
+		//GD.Print(domeczek.Name);
 		domeczek.Name = "pole"+temp1+temp2;
-		GD.Print("''''''''''");
-		GD.Print(domeczek.Name);
+		//GD.Print("''''''''''");
+		//GD.Print(domeczek.Name);
 		domeczek.Position = new Vector2(30*temp1, 30*temp2);
 		
 	}

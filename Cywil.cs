@@ -137,7 +137,7 @@ public partial class Cywil : Node2D
 	}
 	
 	public int[][] pathfinding(dynamic obszar){
-		GD.Print(this.Name);
+		//GD.Print(this.Name);
 		string temp = this.Name;
 		char iii = temp[4];
 		string ii = Convert.ToString(iii);
@@ -374,6 +374,6 @@ public partial class Cywil : Node2D
 		}
 		
 		void _on_area_2d_mouse_entered(){
-			GD.Print(this.Name);
+			//GD.Print(this.Name);
 		}
 }

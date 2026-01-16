@@ -174,7 +174,7 @@ public partial class Board : Node2D
 	
 	public void tura(){
 		//GD.Print("chuj");
-		this.wypisz();
+		//this.wypisz();
 		foreach (var straznik in this.straznicy){
 			straznik.poruszaj();
 		}

@@ -137,7 +137,7 @@ public partial class Cywil : Node2D
 	}
 	
 	public int[][] pathfinding(dynamic obszar){
-		//GD.Print(this.Name);
+		GD.Print(this.Name);
 		string temp = this.Name;
 		char iii = temp[4];
 		string ii = Convert.ToString(iii);
@@ -357,6 +357,7 @@ public partial class Cywil : Node2D
 				int ja_y = Convert.ToInt32(yy);
 				
 				tablica.table[ja_i][ja_y] = 0;
+				this.Name = "sadfasdf";
 				this.QueueFree();
 				
 				var node = GetNode<Node2D>("/root/Node2D");
@@ -366,6 +367,9 @@ public partial class Cywil : Node2D
 				node.AddChild(domeczek);
 				//GD.Print(domeczek);
 				domeczek.Position = new Vector2(30*ja_i, 30*ja_y);
+				
+				//GD.Print("USUNIĘTE!!!!");
+				//GD.Print(domeczek.Name);
 			}
 		}
 		

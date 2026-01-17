@@ -74,7 +74,7 @@ public partial class Main : Node2D
 		
 		var table = GetNode<Board>("tableNode");
 		table.tura();
-		if (tura%3 == 0){
+		if (tura%3 == 1 && tura < 3){
 			table.dodajCywila();
 		}
 		

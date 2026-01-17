@@ -86,6 +86,8 @@ public partial class Board : Node2D
 	
 	public List<Cywil> cywile = new List<Cywil>();
 	
+	public List<Bandyta> bandyci = new List<Bandyta>();
+	
 	public List<Cywil> cywileDeathList = new List<Cywil>();
 	
 	public void dodajDomek(int x, int y){
@@ -193,8 +195,12 @@ public partial class Board : Node2D
 			straznik.poruszaj();
 		}
 		
-		foreach (var cywil in this.cywile){
-			cywil.poruszaj();
+		//foreach (var cywil in this.cywile){
+			//cywil.poruszaj();
+		//}
+		
+		foreach (var bandyta in this.bandyci){
+			bandyta.kazdaTura();
 		}
 		
 		foreach (var cywil in this.cywileDeathList){
@@ -248,6 +254,8 @@ public partial class Board : Node2D
 					node.AddChild(domeczek);
 					//GD.Print(domeczek);
 					domeczek.Position = new Vector2(30*i, 30*y);
+					
+					this.bandyci.Add(domeczek);
 					
 				} else if (this.table[i][y] == 3004){
 					//GD.Print(node);

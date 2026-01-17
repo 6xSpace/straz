@@ -74,9 +74,9 @@ public partial class PustePole : Node2D
 					string yy1 = Convert.ToString(yyy1);
 					int y1 = Convert.ToInt32(yy1);
 					
-					GD.Print(item);
-					GD.Print(i1, y1);
-					GD.Print(tablica.table[i1][y1]);
+					//GD.Print(item);
+					//GD.Print(i1, y1);
+					//GD.Print(tablica.table[i1][y1]);
 					//tablica.wypisz();
 					//GD.Print("", string.Join(", ", sekwencja));
 			

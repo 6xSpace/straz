@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public partial class PustePole : Node2D
 {
-	List<string> sekwencja = new List<string>();
+	public List<string> sekwencja = new List<string>();
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -35,6 +35,13 @@ public partial class PustePole : Node2D
 							var pole = GetNode<Sprite2D>("/root/Node2D/pole"+pole_i+pole_y+"/Sprite2D");
 							
 							pole.Texture = null;
+						}
+					} else if (tablica.table[pole_i][pole_y] == 3003){
+						if (!tablica.tychNieCzysc.Contains("pole"+pole_i+pole_y)){
+							var pole = GetNode<Sprite2D>("/root/Node2D/pole"+pole_i+pole_y+"/Sprite2D");
+							
+							var obrazek1 = GD.Load<Texture2D>("res://asstets/placeholder_bandyta.png");
+							pole.Texture = obrazek1;
 						}
 					}
 				}

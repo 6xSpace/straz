@@ -145,16 +145,16 @@ public partial class straznik : Node2D
 		return obszar;
 	}
 	public static void malyPathfinding(dynamic obszar, int pole_i, int pole_y, int licznik){
-		if (obszar[pole_i+1][pole_y] == 0 || (obszar[pole_i+1][pole_y] > licznik && obszar[pole_i+1][pole_y] < 3000)){
+		if (obszar[pole_i+1][pole_y] == 0 || (obszar[pole_i+1][pole_y] > licznik && obszar[pole_i+1][pole_y] < 3000) || obszar[pole_i+1][pole_y] == 3003){
 			obszar[pole_i+1][pole_y] = licznik;
 		} 
-		if (obszar[pole_i-1][pole_y] == 0 || (obszar[pole_i-1][pole_y] > licznik && obszar[pole_i-1][pole_y] < 3000)){
+		if (obszar[pole_i-1][pole_y] == 0 || (obszar[pole_i-1][pole_y] > licznik && obszar[pole_i-1][pole_y] < 3000 || obszar[pole_i-1][pole_y] == 3003)){
 			obszar[pole_i-1][pole_y] = licznik;
 		} 
-		if (obszar[pole_i][pole_y+1] == 0 || (obszar[pole_i][pole_y+1] > licznik && obszar[pole_i][pole_y+1] < 3000)){
+		if (obszar[pole_i][pole_y+1] == 0 || (obszar[pole_i][pole_y+1] > licznik && obszar[pole_i][pole_y+1] < 3000 || obszar[pole_i][pole_y+1] == 3003)){
 			obszar[pole_i][pole_y+1] = licznik;
 		} 
-		if (obszar[pole_i][pole_y-1] == 0 || (obszar[pole_i][pole_y-1] > licznik && obszar[pole_i][pole_y-1] < 3000)){
+		if (obszar[pole_i][pole_y-1] == 0 || (obszar[pole_i][pole_y-1] > licznik && obszar[pole_i][pole_y-1] < 3000 || obszar[pole_i][pole_y-1] == 3003)){
 			obszar[pole_i][pole_y-1] = licznik;
 		}
 		
@@ -225,7 +225,7 @@ public partial class straznik : Node2D
 			yy = Convert.ToString(yyy);
 			int cel_y = Convert.ToInt32(yy);
 			
-			if (tablica.table[cel_i][cel_y] != 3002 && tablica.table[cel_i][cel_y] != 3004){
+			if (tablica.table[cel_i][cel_y] != 3002 && tablica.table[cel_i][cel_y] != 3004 && tablica.table[cel_i][cel_y] != 3003){
 				var cel = GetNode<PustePole>("/root/Node2D/"+this.sekwencja.Last());
 					var obrazek = GetNode<Sprite2D>("/root/Node2D/"+this.sekwencja.Last()+"/Sprite2D");
 					obrazek.Texture = null;
@@ -380,6 +380,10 @@ public partial class straznik : Node2D
 					
 				} else if (tablica.table[cel_i][cel_y] != 3004){
 					GD.Print("czekaj!");
+				} else if (tablica.table[cel_i][cel_y] != 3003){
+					GD.Print("dorwać go!");
+					var bandyta = GetNode<Bandyta>("/root/Node2D/pole"+cel_i+cel_y);
+					bandyta.QueueFree();
 				}
 				
 				//GD.Print("to ja! strażnik z "+this.Name);

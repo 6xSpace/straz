@@ -225,7 +225,7 @@ public partial class straznik : Node2D
 			yy = Convert.ToString(yyy);
 			int cel_y = Convert.ToInt32(yy);
 			
-			if (tablica.table[cel_i][cel_y] != 3002){
+			if (tablica.table[cel_i][cel_y] != 3002 && tablica.table[cel_i][cel_y] != 3004){
 				var cel = GetNode<PustePole>("/root/Node2D/"+this.sekwencja.Last());
 					var obrazek = GetNode<Sprite2D>("/root/Node2D/"+this.sekwencja.Last()+"/Sprite2D");
 					obrazek.Texture = null;
@@ -285,7 +285,7 @@ public partial class straznik : Node2D
 						}
 					}
 					//tablica.wypisz();
-				} else {
+				} else if (tablica.table[cel_i][cel_y] != 3002) {
 					//GD.Print("stoję! moja sekwencja: ");
 					//GD.Print("", string.Join(", ", this.sekwencja));
 					
@@ -378,6 +378,8 @@ public partial class straznik : Node2D
 					//}
 					
 					
+				} else if (tablica.table[cel_i][cel_y] != 3004){
+					GD.Print("czekaj!");
 				}
 				
 				//GD.Print("to ja! strażnik z "+this.Name);

@@ -70,9 +70,9 @@ public partial class Main : Node2D
 		
 		var table = GetNode<Board>("tableNode");
 		table.tura();
-		//if (tura%3 == 0){
-			//table.dodajCywila();
-		//}
+		if (tura%3 == 0){
+			table.dodajCywila();
+		}
 		
 	}
 	

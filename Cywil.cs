@@ -296,7 +296,7 @@ public partial class Cywil : Node2D
 					
 				
 				//tablica.wypisz();
-				} else if (tablica.table[cel_i][cel_y] == 3004){
+				} else if (tablica.table[cel_i][cel_y] == 3004 || tablica.table[cel_i][cel_y] == 3002){
 					//GD.Print("WESZŁO!!!!!!");
 					//var tablica = GetNode<Board>("/root/Node2D/tableNode");
 					this.tablicaSciezki = tablica.tablicaSciezki.Clone() as int[][];

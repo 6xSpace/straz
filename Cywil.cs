@@ -8,7 +8,7 @@ public partial class Cywil : Node2D
 {
 	List<string> sekwencja = new List<string>();
 	Dictionary<string, string> cele = new Dictionary<string, string>();
-	public int[][] tablicaSciezki = 
+	int[][] tablicaSciezki = 
 	[[0,0,0,0,0,0,0,0,0,0,],
 	[0,0,0,0,0,0,0,0,0,0,],
 	[0,0,0,0,0,0,0,0,0,0,],
@@ -179,6 +179,8 @@ public partial class Cywil : Node2D
 			//////////
 			//GD.Print(obszar.Length);
 			//GD.Print(pole_i);
+			
+			
 			
 			if (obszar[pole_i+1][pole_y] == 3001 && licznik > 3){
 				try{

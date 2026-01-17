@@ -225,6 +225,8 @@ public partial class straznik : Node2D
 			yy = Convert.ToString(yyy);
 			int cel_y = Convert.ToInt32(yy);
 			
+			GD.Print(tablica.table[cel_i][cel_y]);
+			
 			if (tablica.table[cel_i][cel_y] != 3002 && tablica.table[cel_i][cel_y] != 3004 && tablica.table[cel_i][cel_y] != 3003){
 				var cel = GetNode<PustePole>("/root/Node2D/"+this.sekwencja.Last());
 					var obrazek = GetNode<Sprite2D>("/root/Node2D/"+this.sekwencja.Last()+"/Sprite2D");
@@ -285,7 +287,7 @@ public partial class straznik : Node2D
 						}
 					}
 					//tablica.wypisz();
-				} else if (tablica.table[cel_i][cel_y] != 3002) {
+				} else if (tablica.table[cel_i][cel_y] == 3002) {
 					//GD.Print("stoję! moja sekwencja: ");
 					//GD.Print("", string.Join(", ", this.sekwencja));
 					
@@ -378,12 +380,26 @@ public partial class straznik : Node2D
 					//}
 					
 					
-				} else if (tablica.table[cel_i][cel_y] != 3004){
+				} else if (tablica.table[cel_i][cel_y] == 3004){
 					GD.Print("czekaj!");
-				} else if (tablica.table[cel_i][cel_y] != 3003){
+				} else if (tablica.table[cel_i][cel_y] == 3003){
 					GD.Print("dorwać go!");
 					var bandyta = GetNode<Bandyta>("/root/Node2D/pole"+cel_i+cel_y);
+					bandyta.Name = "fsdfasdf";
 					bandyta.QueueFree();
+					
+					
+					var node = GetNode<Node2D>("/root/Node2D");
+					var domek1 = GD.Load<PackedScene>("res://puste_pole.tscn");
+					var domeczek = domek1.Instantiate<PustePole>();
+					domeczek.Name = "pole"+cel_i+cel_y;
+					node.AddChild(domeczek);
+					//GD.Print(domeczek);
+					domeczek.Position = new Vector2(30*cel_i, 30*cel_y);
+					tablica.table[cel_i][cel_y] = 0;
+					
+					this.poruszaj();
+					
 				}
 				
 				//GD.Print("to ja! strażnik z "+this.Name);

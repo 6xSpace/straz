@@ -20,6 +20,7 @@ public partial class PustePole : Node2D
 		//GD.Print(this.Name);
 		var sprite = GetNode<Sprite2D>("Sprite2D");
 		var obrazek = GD.Load<Texture2D>("res://asstets/puste_klik.png");
+		var obrazekBandyta = GD.Load<Texture2D>("res://asstets/placeholder_bandyta_klik.png");
 		
 		
 		var tablica = GetNode<Board>("/root/Node2D/tableNode");
@@ -64,8 +65,31 @@ public partial class PustePole : Node2D
 				szukaj(szukajacy.tablicaSciezki, i, y, szukajacy.tablicaSciezki[i][y]);
 				
 				foreach (var item in sekwencja){
-					var pole = GetNode<Sprite2D>("/root/Node2D/"+item+"/Sprite2D");
-					pole.Texture = obrazek;
+					
+					string temp1 = item;
+					char iii1 = temp1[4];
+					string ii1 = Convert.ToString(iii1);
+					int i1 = Convert.ToInt32(ii1);
+					char yyy1 = temp1[5];
+					string yy1 = Convert.ToString(yyy1);
+					int y1 = Convert.ToInt32(yy1);
+					
+					GD.Print(item);
+					GD.Print(i1, y1);
+					GD.Print(tablica.table[i1][y1]);
+					//tablica.wypisz();
+					//GD.Print("", string.Join(", ", sekwencja));
+			
+					if (tablica.table[i1][y1] == 0){
+						//GD.Print("weszło!111");
+						var pole = GetNode<Sprite2D>("/root/Node2D/"+item+"/Sprite2D");
+						pole.Texture = obrazek;
+					} else if (tablica.table[i1][y1] == 3003){
+						GD.Print("weszło!");
+						var pole = GetNode<Sprite2D>("/root/Node2D/"+item+"/Sprite2D");
+						pole.Texture = obrazekBandyta;
+					}
+					
 				}
 			}
 			

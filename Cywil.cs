@@ -370,6 +370,9 @@ public partial class Cywil : Node2D
 				
 				//GD.Print("USUNIĘTE!!!!");
 				//GD.Print(domeczek.Name);
+				
+				var tata = GetNode<Main>("/root/Node2D");
+				tata.dodajPunkt();
 			}
 		}
 		

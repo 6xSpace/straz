@@ -108,7 +108,7 @@ public partial class PustePole : Node2D
 				var tablica = GetNode<Board>("/root/Node2D/tableNode");
 				tablica.szukacSciezki = false;
 				if (!tablica.wylaczKlikanie && tablica.szukajacy.Count != 0 && sekwencja.Count > 0){
-					GD.Print("weszło!");
+					//GD.Print("weszło!");
 					tablica.wylaczKlikanie = true;
 					//////////////////////////////////////////////////////////////
 					//ABSOLUTNE TYPY REFERENCYJNE RIGHT THERE

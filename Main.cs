@@ -6,6 +6,7 @@ public partial class Main : Node2D
 	public double tempo = 1;
 	public bool paused = false;
 	public int tura = 0;
+	public int punkty = 0;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -35,6 +36,9 @@ public partial class Main : Node2D
 		
 		var napis2 = GetNode<RichTextLabel>("napisTempo");
 		napis2.Text = "tura co: 1s";
+		
+		var napis3 = GetNode<RichTextLabel>("napisPunkty");
+		napis3.Text = "Punkty: "+this.punkty;
 		//napis.Color = "black";
 		
 		//var domek = new Sprite2D();
@@ -74,6 +78,12 @@ public partial class Main : Node2D
 			table.dodajCywila();
 		}
 		
+	}
+	
+	public void dodajPunkt(){
+		this.punkty += 1;
+		var napis3 = GetNode<RichTextLabel>("napisPunkty");
+		napis3.Text = "Punkty: "+this.punkty;
 	}
 	
 	public void _on_area_2d_input_event(Node viewport, InputEvent @event, long shapeIdx){

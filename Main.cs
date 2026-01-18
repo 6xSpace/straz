@@ -7,7 +7,7 @@ public partial class Main : Node2D
 	public bool paused = false;
 	public int tura = 0;
 	public int punkty = 0;
-	public int hp = 103;
+	public int hp = 3;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -83,6 +83,19 @@ public partial class Main : Node2D
 		}
 		if (tura%15 == 0){
 			table.dodajBandyte();
+		}
+		
+		if (this.hp == 0){
+			var timer = GetNode<Timer>("/root/Node2D/Timer");
+			timer.Stop();
+			var ekran = GetNode<Sprite2D>("ekranKonca");
+			ekran.Visible = true;
+			var napisKonca = GetNode<RichTextLabel>("napisKonca");
+			napisKonca.Visible = true;
+			napisKonca.Text = "Koniec! twój wynik: " + this.punkty;
+			
+			this.MoveChild(ekran, -1);
+			this.MoveChild(napisKonca, -1);
 		}
 		
 	}

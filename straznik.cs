@@ -388,6 +388,8 @@ public partial class straznik : Node2D
 					bandyta.Name = "fsdfasdf";
 					bandyta.QueueFree();
 					
+					tablica.bandyciDeathList.Add(bandyta);
+					
 					
 					var node = GetNode<Node2D>("/root/Node2D");
 					var domek1 = GD.Load<PackedScene>("res://puste_pole.tscn");

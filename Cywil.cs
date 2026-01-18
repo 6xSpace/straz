@@ -21,6 +21,7 @@ public partial class Cywil : Node2D
 	[0,0,0,0,0,0,0,0,0,0,]] ;
 	
 	string[] cel;
+	public int delay = 0;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -251,7 +252,9 @@ public partial class Cywil : Node2D
 	}
 	
 	public void poruszaj(){
-		if (this.sekwencja.Count > 0){
+		if (this.delay == 0){
+			this.delay = 3;
+			if (this.sekwencja.Count > 0){
 			
 			var tablica = GetNode<Board>("/root/Node2D/tableNode");
 			
@@ -376,9 +379,13 @@ public partial class Cywil : Node2D
 				var tata = GetNode<Main>("/root/Node2D");
 				tata.dodajPunkt();
 			}
+		} else {
+			this.delay--;
 		}
+	}
 		
 		void _on_area_2d_mouse_entered(){
 			GD.Print(this.Name);
 		}
+		
 }

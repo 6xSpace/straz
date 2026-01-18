@@ -33,9 +33,10 @@ public partial class Bandyta : PustePole
 	public void kazdaTura(){
 		
 		if (this.delay == 0){
-			this.delay = 2;
+			this.delay = 1;
 			this.sekwencja.Clear();
 			this.ofiara = null;
+			this.aktualnyDystans = 1000;
 			var tablica = GetNode<Board>("/root/Node2D/tableNode");
 			//this.tablicaSciezki = tablica.table.Clone() as int[][];
 			for (int pole_i = 0; pole_i<tablica.table.Length; pole_i++)
@@ -45,12 +46,14 @@ public partial class Bandyta : PustePole
 				}
 			}
 			
-			this.pathfinding(this.tablicaSciezki);
-			
 			//foreach(var chuj in this.tablicaSciezki)
 			//{
 				//GD.Print("", string.Join(", ", chuj));
 			//}
+			
+			this.pathfinding(this.tablicaSciezki);
+			
+			
 			
 			GD.Print(this.ofiara);
 			
@@ -338,11 +341,13 @@ public partial class Bandyta : PustePole
 				
 				//tablica.wypisz();
 				} else if (tablica.table[cel_i][cel_y] == 3004){
+					
 					GD.Print("lmao get robbd");
 					var cywil = GetNode<Cywil>("/root/Node2D/pole"+cel_i+cel_y);
 					cywil.Name = "fsdfasdf";
 					cywil.QueueFree();
 					
+					tablica.cywileDeathList.Add(cywil);
 					
 					var node = GetNode<Node2D>("/root/Node2D");
 					var domek1 = GD.Load<PackedScene>("res://puste_pole.tscn");

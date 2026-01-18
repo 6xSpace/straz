@@ -90,6 +90,8 @@ public partial class Board : Node2D
 	
 	public List<Cywil> cywileDeathList = new List<Cywil>();
 	
+	public List<Bandyta> bandyciDeathList = new List<Bandyta>();
+	
 	public void dodajDomek(int x, int y){
 		this.table[y][x] = 3001;
 		//GD.Print(this.table);
@@ -196,9 +198,9 @@ public partial class Board : Node2D
 			straznik.poruszaj();
 		}
 		
-		//foreach (var cywil in this.cywile){
-			//cywil.poruszaj();
-		//}
+		foreach (var cywil in this.cywile){
+			cywil.poruszaj();
+		}
 		
 		foreach (var bandyta in this.bandyci){
 			bandyta.kazdaTura();
@@ -207,6 +209,12 @@ public partial class Board : Node2D
 		foreach (var cywil in this.cywileDeathList){
 			this.cywile.Remove(cywil);
 		}
+		
+		foreach (var bandyta in this.bandyciDeathList){
+			this.bandyci.Remove(bandyta);
+		}
+		
+		
 	}
 	
 	public void generuj(dynamic node){

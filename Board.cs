@@ -198,6 +198,10 @@ public partial class Board : Node2D
 			straznik.poruszaj();
 		}
 		
+		foreach (var bandyta in this.bandyciDeathList){
+			this.bandyci.Remove(bandyta);
+		}
+		
 		foreach (var cywil in this.cywile){
 			cywil.poruszaj();
 		}
@@ -208,10 +212,6 @@ public partial class Board : Node2D
 		
 		foreach (var cywil in this.cywileDeathList){
 			this.cywile.Remove(cywil);
-		}
-		
-		foreach (var bandyta in this.bandyciDeathList){
-			this.bandyci.Remove(bandyta);
 		}
 		
 		

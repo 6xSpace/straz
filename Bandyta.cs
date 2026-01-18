@@ -146,7 +146,7 @@ public partial class Bandyta : PustePole
 		
 		var tablica = GetNode<Board>("/root/Node2D/tableNode");
 		//GD.Print(tablica);
-		//GD.Print(string.Join(", ", tablica.tychNieCzysc));
+		GD.Print(string.Join(", ", tablica.tychNieCzysc));
 		
 		for (int pole_i = 0; pole_i<tablica.table.Length; pole_i++)
 			{
@@ -159,7 +159,7 @@ public partial class Bandyta : PustePole
 							pole.Texture = null;
 						}
 					} else if (tablica.table[pole_i][pole_y] == 3003){
-						if (!tablica.tychNieCzysc.Contains("pole"+pole_i+pole_y)){
+						if (!tablica.tychNieCzysc.Contains("pole"+pole_i+pole_y) && "pole"+pole_i+pole_y == this.Name){
 							var pole = GetNode<Sprite2D>("/root/Node2D/pole"+pole_i+pole_y+"/Sprite2D");
 							
 							pole.Texture = obrazekBandyta;
@@ -183,7 +183,7 @@ public partial class Bandyta : PustePole
 				
 				this.sekwencja.Add(this.Name);
 				this.szukaj(szukajacy.tablicaSciezki, i, y, szukajacy.tablicaSciezki[i][y]);
-				GD.Print("", string.Join(", ", this.sekwencja));
+				//GD.Print("", string.Join(", ", this.sekwencja));
 				foreach (var item in sekwencja){
 					var pole = GetNode<Sprite2D>("/root/Node2D/"+item+"/Sprite2D");
 					pole.Texture = obrazek;

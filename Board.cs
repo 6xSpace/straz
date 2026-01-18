@@ -163,7 +163,8 @@ public partial class Board : Node2D
 		//GD.Print("pole"+temp1+temp2);
 		domeczek.Name = "pole"+temp1+temp2;
 		
-		this.AddChild(domeczek);
+		var node = GetNode<Node2D>("/root/Node2D");
+		node.AddChild(domeczek);
 		this.cywile.Add(domeczek);
 		//GD.Print("''''''''''");
 		//GD.Print(domeczek.Name);

@@ -8,6 +8,7 @@ public partial class Bandyta : PustePole
 	List<string> sekwencja = new List<string>();
 	public string? ofiara = null;
 	public int aktualnyDystans = 1000;
+	public int delay = 0;
 	int[][] tablicaSciezki = 
 	[[0,0,0,0,0,0,0,0,0,0,],
 	[0,0,0,0,0,0,0,0,0,0,],
@@ -30,39 +31,48 @@ public partial class Bandyta : PustePole
 	}
 	
 	public void kazdaTura(){
-		this.sekwencja.Clear();
-		this.ofiara = null;
-		var tablica = GetNode<Board>("/root/Node2D/tableNode");
-		//this.tablicaSciezki = tablica.table.Clone() as int[][];
-		for (int pole_i = 0; pole_i<tablica.table.Length; pole_i++)
-		{
-			for (int pole_y = 0; pole_y<tablica.table[pole_i].Length; pole_y++){
-				this.tablicaSciezki[pole_i][pole_y] = tablica.table[pole_i][pole_y];
+		
+		if (this.delay == 0){
+			this.delay = 2;
+			this.sekwencja.Clear();
+			this.ofiara = null;
+			var tablica = GetNode<Board>("/root/Node2D/tableNode");
+			//this.tablicaSciezki = tablica.table.Clone() as int[][];
+			for (int pole_i = 0; pole_i<tablica.table.Length; pole_i++)
+			{
+				for (int pole_y = 0; pole_y<tablica.table[pole_i].Length; pole_y++){
+					this.tablicaSciezki[pole_i][pole_y] = tablica.table[pole_i][pole_y];
+				}
 			}
-		}
-		
-		this.pathfinding(this.tablicaSciezki);
-		
-		foreach(var chuj in this.tablicaSciezki)
-		{
-			GD.Print("", string.Join(", ", chuj));
-		}
-		
-		GD.Print(this.ofiara);
-		
-		if (this.ofiara != null){
-			char iii = ofiara[4];
-			string ii = Convert.ToString(iii);
-			int i = Convert.ToInt32(ii);
-			char yyy = ofiara[5];
-			string yy = Convert.ToString(yyy);
-			int y = Convert.ToInt32(yy);
-			sekwencja.Add(ofiara);
-			//GD.Print(ii, yy);
-			this.zrobSekwencje(this.tablicaSciezki, i, y, this.tablicaSciezki[i][y]);
 			
-			GD.Print("", string.Join(", ", this.sekwencja));
+			this.pathfinding(this.tablicaSciezki);
+			
+			//foreach(var chuj in this.tablicaSciezki)
+			//{
+				//GD.Print("", string.Join(", ", chuj));
+			//}
+			
+			GD.Print(this.ofiara);
+			
+			if (this.ofiara != null){
+				char iii = ofiara[4];
+				string ii = Convert.ToString(iii);
+				int i = Convert.ToInt32(ii);
+				char yyy = ofiara[5];
+				string yy = Convert.ToString(yyy);
+				int y = Convert.ToInt32(yy);
+				sekwencja.Add(ofiara);
+				//GD.Print(ii, yy);
+				this.zrobSekwencje(this.tablicaSciezki, i, y, this.tablicaSciezki[i][y]);
+				
+				//GD.Print("", string.Join(", ", this.sekwencja));
+				
+				this.poruszaj();
+			}
+		} else {
+			this.delay--;
 		}
+		
 		
 	}
 	
@@ -277,5 +287,74 @@ public partial class Bandyta : PustePole
 		//}
 		
 		return obszar;
+	}
+	
+	public void poruszaj(){
+		if (this.sekwencja.Count > 0){
+			
+			var tablica = GetNode<Board>("/root/Node2D/tableNode");
+			
+			string temp = this.Name;
+			char iii = temp[4];
+			string ii = Convert.ToString(iii);
+			int ja_i = Convert.ToInt32(ii);
+			char yyy = temp[5];
+			string yy = Convert.ToString(yyy);
+			int ja_y = Convert.ToInt32(yy);
+			
+			temp = this.sekwencja.Last();
+			iii = temp[4];
+			ii = Convert.ToString(iii);
+			int cel_i = Convert.ToInt32(ii);
+			yyy = temp[5];
+			yy = Convert.ToString(yyy);
+			int cel_y = Convert.ToInt32(yy);
+			
+			if (tablica.table[cel_i][cel_y] != 3002 && tablica.table[cel_i][cel_y] != 3003 && tablica.table[cel_i][cel_y] != 3004){
+				var cel = GetNode<PustePole>("/root/Node2D/"+this.sekwencja.Last());
+				//var obrazek = GetNode<Sprite2D>("/root/Node2D/"+this.sekwencja.Last()+"/Sprite2D");
+				//obrazek.Texture = null;
+					
+				//var tablica = GetNode<Board>("/root/Node2D/tableNode");
+				var tempPosition = this.Position;
+				var tempName = this.Name;
+				var tempName2 = cel.Name;
+					
+				this.Position = cel.Position;
+				cel.Position = tempPosition;
+					
+				cel.Name = "chuj";
+				this.Name = tempName2;
+				cel.Name = tempName;
+				//GD.Print(this.Name);
+					
+				var tempID = tablica.table[ja_i][ja_y];
+				tablica.table[ja_i][ja_y] = tablica.table[cel_i][cel_y];
+				tablica.table[cel_i][cel_y] = tempID;
+					
+					
+				this.sekwencja.RemoveAt(this.sekwencja.Count - 1);
+					
+				
+				//tablica.wypisz();
+				} else if (tablica.table[cel_i][cel_y] == 3004){
+					GD.Print("lmao get robbd");
+					var cywil = GetNode<Cywil>("/root/Node2D/pole"+cel_i+cel_y);
+					cywil.Name = "fsdfasdf";
+					cywil.QueueFree();
+					
+					
+					var node = GetNode<Node2D>("/root/Node2D");
+					var domek1 = GD.Load<PackedScene>("res://puste_pole.tscn");
+					var domeczek = domek1.Instantiate<PustePole>();
+					domeczek.Name = "pole"+cel_i+cel_y;
+					node.AddChild(domeczek);
+					//GD.Print(domeczek);
+					domeczek.Position = new Vector2(30*cel_i, 30*cel_y);
+					tablica.table[cel_i][cel_y] = 0;
+					
+					this.poruszaj();
+				}
+		}
 	}
 }

@@ -379,6 +379,6 @@ public partial class Cywil : Node2D
 		}
 		
 		void _on_area_2d_mouse_entered(){
-			//GD.Print(this.Name);
+			GD.Print(this.Name);
 		}
 }

@@ -349,7 +349,7 @@ public partial class Bandyta : PustePole
 					
 					tablica.cywileDeathList.Add(cywil);
 					
-					var node = GetNode<Node2D>("/root/Node2D");
+					var node = GetNode<Main>("/root/Node2D");
 					var domek1 = GD.Load<PackedScene>("res://puste_pole.tscn");
 					var domeczek = domek1.Instantiate<PustePole>();
 					domeczek.Name = "pole"+cel_i+cel_y;
@@ -357,6 +357,8 @@ public partial class Bandyta : PustePole
 					//GD.Print(domeczek);
 					domeczek.Position = new Vector2(30*cel_i, 30*cel_y);
 					tablica.table[cel_i][cel_y] = 0;
+					
+					node.odejmijHP();
 					
 					this.poruszaj();
 				}

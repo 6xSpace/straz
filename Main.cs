@@ -81,6 +81,9 @@ public partial class Main : Node2D
 		if (tura%7 == 1){
 			table.dodajCywila();
 		}
+		if (tura%15 == 0){
+			table.dodajBandyte();
+		}
 		
 	}
 	

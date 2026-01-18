@@ -176,6 +176,52 @@ public partial class Board : Node2D
 		domeczek.Position = new Vector2(30*temp1, 30*temp2);
 		
 	}
+	
+	public void dodajBandyte(){
+		Random rand = new Random();
+		List<string> starty = new List<string>();
+		for (int i = 0; i<this.table.Length; i++)
+		{
+			for (int y = 0; y<this.table[i].Length; y++){
+					if (this.table[i][y] == 0){
+						starty.Add("pole"+i+y);
+					}
+				}
+			}
+		string start = starty[rand.Next(0, starty.Count)];
+		//GD.Print(start);
+		//GD.Print(start[5]);
+		//GD.Print(start[4]);
+		int temp1 = Int32.Parse(Convert.ToString(start[4]));
+		int temp2 = Int32.Parse(Convert.ToString(start[5]));
+		
+		this.table[temp1][temp2] = 3003;
+		var pole = GetNode<PustePole>("/root/Node2D/"+start);
+		pole.Name = "chuj";
+		pole.QueueFree();
+		//pole.Name = "chuj";
+		//GD.Print(pole.Name);
+		
+		
+		
+		
+		var domek1 = GD.Load<PackedScene>("res://Bandyta.tscn");
+		var domeczek = domek1.Instantiate<Bandyta>();
+		//GD.Print("pole"+temp1+temp2);
+		domeczek.Name = "pole"+temp1+temp2;
+		
+		var node = GetNode<Node2D>("/root/Node2D");
+		node.AddChild(domeczek);
+		this.bandyci.Add(domeczek);
+		//GD.Print("''''''''''");
+		//GD.Print(domeczek.Name);
+		domeczek.Name = "pole"+temp1+temp2;
+		//GD.Print("''''''''''");
+		//GD.Print(domeczek.Name);
+		domeczek.Position = new Vector2(30*temp1, 30*temp2);
+		
+	}
+	
 	public void wypisz(){
 		foreach(var i in this.table)
 		{

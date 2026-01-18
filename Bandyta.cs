@@ -6,6 +6,7 @@ using System.Linq;
 public partial class Bandyta : PustePole
 {
 	List<string> sekwencja = new List<string>();
+	List<string> sekwencjaMoja = new List<string>();
 	public string? ofiara = null;
 	public int aktualnyDystans = 1000;
 	public int delay = 0;
@@ -34,7 +35,7 @@ public partial class Bandyta : PustePole
 		
 		if (this.delay == 0){
 			this.delay = 1;
-			this.sekwencja.Clear();
+			this.sekwencjaMoja.Clear();
 			this.ofiara = null;
 			this.aktualnyDystans = 1000;
 			var tablica = GetNode<Board>("/root/Node2D/tableNode");
@@ -64,7 +65,7 @@ public partial class Bandyta : PustePole
 				char yyy = ofiara[5];
 				string yy = Convert.ToString(yyy);
 				int y = Convert.ToInt32(yy);
-				sekwencja.Add(ofiara);
+				sekwencjaMoja.Add(ofiara);
 				//GD.Print(ii, yy);
 				this.zrobSekwencje(this.tablicaSciezki, i, y, this.tablicaSciezki[i][y]);
 				
@@ -86,7 +87,7 @@ public partial class Bandyta : PustePole
 			if (licznik >= 0 && obszar[pole_i+1][pole_y] == licznik-1){
 				//GD.Print("WCHODZI22222");
 				int temp = pole_i+1;
-				sekwencja.Add("pole"+temp+pole_y);
+				sekwencjaMoja.Add("pole"+temp+pole_y);
 				zrobSekwencje(obszar, pole_i+1, pole_y, licznik-1);
 				gdziesWeszlo = true;
 			}
@@ -94,7 +95,7 @@ public partial class Bandyta : PustePole
 		if (pole_i > 0 && !gdziesWeszlo){
 			if (licznik >= 0 && obszar[pole_i-1][pole_y] == licznik-1){
 				int temp = pole_i-1;
-				sekwencja.Add("pole"+temp+pole_y);
+				sekwencjaMoja.Add("pole"+temp+pole_y);
 				zrobSekwencje(obszar, pole_i-1, pole_y, licznik-1);
 				gdziesWeszlo = true;
 			}
@@ -102,7 +103,7 @@ public partial class Bandyta : PustePole
 		if (pole_y+1 < obszar[0].Length && !gdziesWeszlo){
 			if (licznik >= 0 && obszar[pole_i][pole_y+1] == licznik-1){
 				int temp = pole_y+1;
-				sekwencja.Add("pole"+pole_i+temp);
+				sekwencjaMoja.Add("pole"+pole_i+temp);
 				zrobSekwencje(obszar, pole_i, pole_y+1, licznik-1);
 				gdziesWeszlo = true;
 			}
@@ -110,7 +111,7 @@ public partial class Bandyta : PustePole
 		if (pole_y > 0 && !gdziesWeszlo){
 			if (licznik >= 0 && obszar[pole_i][pole_y-1] == licznik-1){
 				int temp = pole_y-1;
-				sekwencja.Add("pole"+pole_i+temp);
+				sekwencjaMoja.Add("pole"+pole_i+temp);
 				zrobSekwencje(obszar, pole_i, pole_y-1, licznik-1);
 				gdziesWeszlo = true;
 			}
@@ -179,9 +180,10 @@ public partial class Bandyta : PustePole
 			var szukajacy = GetNode<straznik>("/root/Node2D/"+tablica.szukajacy[0]);
 			
 			if (szukajacy.tablicaSciezki[i][y] != 9999){
-				sekwencja.Add(this.Name);
-				szukaj(szukajacy.tablicaSciezki, i, y, szukajacy.tablicaSciezki[i][y]);
 				
+				this.sekwencja.Add(this.Name);
+				this.szukaj(szukajacy.tablicaSciezki, i, y, szukajacy.tablicaSciezki[i][y]);
+				GD.Print("", string.Join(", ", this.sekwencja));
 				foreach (var item in sekwencja){
 					var pole = GetNode<Sprite2D>("/root/Node2D/"+item+"/Sprite2D");
 					pole.Texture = obrazek;
@@ -293,7 +295,7 @@ public partial class Bandyta : PustePole
 	}
 	
 	public void poruszaj(){
-		if (this.sekwencja.Count > 0){
+		if (this.sekwencjaMoja.Count > 0){
 			
 			var tablica = GetNode<Board>("/root/Node2D/tableNode");
 			
@@ -305,7 +307,7 @@ public partial class Bandyta : PustePole
 			string yy = Convert.ToString(yyy);
 			int ja_y = Convert.ToInt32(yy);
 			
-			temp = this.sekwencja.Last();
+			temp = this.sekwencjaMoja.Last();
 			iii = temp[4];
 			ii = Convert.ToString(iii);
 			int cel_i = Convert.ToInt32(ii);
@@ -314,7 +316,7 @@ public partial class Bandyta : PustePole
 			int cel_y = Convert.ToInt32(yy);
 			
 			if (tablica.table[cel_i][cel_y] != 3002 && tablica.table[cel_i][cel_y] != 3003 && tablica.table[cel_i][cel_y] != 3004){
-				var cel = GetNode<PustePole>("/root/Node2D/"+this.sekwencja.Last());
+				var cel = GetNode<PustePole>("/root/Node2D/"+this.sekwencjaMoja.Last());
 				//var obrazek = GetNode<Sprite2D>("/root/Node2D/"+this.sekwencja.Last()+"/Sprite2D");
 				//obrazek.Texture = null;
 					
@@ -336,7 +338,7 @@ public partial class Bandyta : PustePole
 				tablica.table[cel_i][cel_y] = tempID;
 					
 					
-				this.sekwencja.RemoveAt(this.sekwencja.Count - 1);
+				this.sekwencjaMoja.RemoveAt(this.sekwencjaMoja.Count - 1);
 					
 				
 				//tablica.wypisz();
@@ -362,6 +364,66 @@ public partial class Bandyta : PustePole
 					
 					this.poruszaj();
 				}
+		}
+	}
+	
+	public void _on_area_2d_mouse_exited(){
+		//GD.Print("chuj", sekwencja[0]);
+		var sprite = GetNode<Sprite2D>("Sprite2D");
+		this.sekwencja.Clear();
+	}
+	
+	public void szukaj(dynamic obszar, int pole_i, int pole_y, int licznik){
+		if (licznik >= 0 && obszar[pole_i+1][pole_y] == licznik-1){
+			int temp = pole_i+1;
+			sekwencja.Add("pole"+temp+pole_y);
+			szukaj(obszar, pole_i+1, pole_y, licznik-1);
+		} else if (licznik >= 0 && obszar[pole_i-1][pole_y] == licznik-1){
+			int temp = pole_i-1;
+			sekwencja.Add("pole"+temp+pole_y);
+			szukaj(obszar, pole_i-1, pole_y, licznik-1);
+		} else if (licznik >= 0 && obszar[pole_i][pole_y-1] == licznik-1){
+			int temp = pole_y-1;
+			sekwencja.Add("pole"+pole_i+temp);
+			szukaj(obszar, pole_i, pole_y-1, licznik-1);
+		} else if (licznik >= 0 && obszar[pole_i][pole_y+1] == licznik-1){
+			int temp = pole_y+1;
+			sekwencja.Add("pole"+pole_i+temp);
+			szukaj(obszar, pole_i, pole_y+1, licznik-1);
+		}
+		
+		
+	}
+	
+	public void _on_area_2d_input_event(Node viewport, InputEvent @event, long shapeIdx){
+		if (@event is InputEventMouseButton mb)
+		{
+			if (mb.ButtonIndex == MouseButton.Left && mb.Pressed)
+			{
+				
+				var tablica = GetNode<Board>("/root/Node2D/tableNode");
+				tablica.szukacSciezki = false;
+				if (!tablica.wylaczKlikanie && tablica.szukajacy.Count != 0 && sekwencja.Count > 0){
+					//GD.Print("weszło!");
+					tablica.wylaczKlikanie = true;
+					//////////////////////////////////////////////////////////////
+					//ABSOLUTNE TYPY REFERENCYJNE RIGHT THERE
+					foreach (string item in sekwencja){
+						tablica.tychNieCzysc.Add(item);
+					}
+					//GD.Print(tablica.szukajacy[0]);
+					var szukajacy = GetNode<straznik>("/root/Node2D/"+tablica.szukajacy[0]);
+					szukajacy.otrzymajSekwencje(sekwencja);
+					
+					var timer = GetNode<Timer>("/root/Node2D/Timer");
+					
+					var tata = GetNode<Main>("/root/Node2D");
+					if (!tata.paused){
+						timer.Start();
+					}
+				}
+				
+			}
 		}
 	}
 }

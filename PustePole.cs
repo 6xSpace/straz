@@ -63,7 +63,8 @@ public partial class PustePole : Node2D
 			if (szukajacy.tablicaSciezki[i][y] != 9999){
 				sekwencja.Add(this.Name);
 				szukaj(szukajacy.tablicaSciezki, i, y, szukajacy.tablicaSciezki[i][y]);
-				
+				//GD.Print("", string.Join(", ", this.sekwencja));
+
 				foreach (var item in sekwencja){
 					
 					string temp1 = item;
@@ -126,8 +127,9 @@ public partial class PustePole : Node2D
 	}
 	
 	public void _on_area_2d_mouse_exited(){
+		//GD.Print("chuj", sekwencja[0]);
 		var sprite = GetNode<Sprite2D>("Sprite2D");
-		sekwencja.Clear();
+		this.sekwencja.Clear();
 	}
 	
 	public void _on_area_2d_input_event(Node viewport, InputEvent @event, long shapeIdx){

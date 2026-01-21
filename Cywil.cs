@@ -29,10 +29,7 @@ public partial class Cywil : Node2D
 		this.tablicaSciezki = tablica.tablicaSciezki.Clone() as int[][];
 		
 		this.szukaj();
-		//foreach(var chuj in this.tablicaSciezki)
-		//{
-			//GD.Print("", string.Join(", ", chuj));
-		//}
+		
 		//GD.Print("", string.Join(", ", this.cele));
 		//GD.Print(cele.Count);
 		
@@ -43,7 +40,7 @@ public partial class Cywil : Node2D
 		} else if (cele.Count == 1){
 			this.cel = [cele.ElementAt(0).Key, cele.ElementAt(0).Value];
 		} else {
-			GD.Print("idk chuj zesraj sie lmao");
+			GD.Print("idk no chyba nie idziemy");
 			return;
 		}
 		
@@ -88,10 +85,7 @@ public partial class Cywil : Node2D
 				}
 			}
 		}
-		//foreach(var chuj in this.tablicaSciezki)
-		//{
-			//GD.Print("", string.Join(", ", chuj));
-		//}
+		
 		this.pathfinding(this.tablicaSciezki);
 		
 	}
@@ -287,7 +281,7 @@ public partial class Cywil : Node2D
 				this.Position = cel.Position;
 				cel.Position = tempPosition;
 					
-				cel.Name = "chuj";
+				cel.Name = "asdasd";
 				this.Name = tempName2;
 				cel.Name = tempName;
 				//GD.Print(this.Name);
@@ -332,7 +326,7 @@ public partial class Cywil : Node2D
 					//this.Position = cel.Position;
 					//cel.Position = tempPosition;
 						//
-					//cel.Name = "chuj";
+					//cel.Name = "wfasdf";
 					//this.Name = tempName2;
 					//cel.Name = tempName;
 					////GD.Print(this.Name);

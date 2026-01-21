@@ -137,10 +137,6 @@ public partial class straznik : Node2D
 			}
 		}
 		
-		//foreach(var chuj in obszar)
-		//{
-			//GD.Print("", string.Join(", ", chuj));
-		//}
 		
 		return obszar;
 	}
@@ -240,7 +236,7 @@ public partial class straznik : Node2D
 					this.Position = cel.Position;
 					cel.Position = tempPosition;
 					
-					cel.Name = "chuj";
+					cel.Name = "dfsadfc";
 					this.Name = tempName2;
 					cel.Name = tempName;
 					//GD.Print(this.Name);

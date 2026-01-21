@@ -127,7 +127,6 @@ public partial class PustePole : Node2D
 	}
 	
 	public void _on_area_2d_mouse_exited(){
-		//GD.Print("chuj", sekwencja[0]);
 		var sprite = GetNode<Sprite2D>("Sprite2D");
 		this.sekwencja.Clear();
 	}

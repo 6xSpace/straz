@@ -152,10 +152,8 @@ public partial class Board : Node2D
 		
 		this.table[temp1][temp2] = 3004;
 		var pole = GetNode<PustePole>("/root/Node2D/"+start);
-		pole.Name = "chuj";
+		pole.Name = "wdfsadfsad";
 		pole.QueueFree();
-		//pole.Name = "chuj";
-		//GD.Print(pole.Name);
 		
 		
 		
@@ -197,10 +195,8 @@ public partial class Board : Node2D
 		
 		this.table[temp1][temp2] = 3003;
 		var pole = GetNode<PustePole>("/root/Node2D/"+start);
-		pole.Name = "chuj";
+		pole.Name = "sdfsadfc";
 		pole.QueueFree();
-		//pole.Name = "chuj";
-		//GD.Print(pole.Name);
 		
 		
 		
@@ -238,8 +234,6 @@ public partial class Board : Node2D
 	}
 	
 	public void tura(){
-		//GD.Print("chuj");
-		//this.wypisz();
 		foreach (var straznik in this.straznicy){
 			straznik.poruszaj();
 		}

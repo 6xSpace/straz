@@ -11,10 +11,8 @@ public partial class Main : Node2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		GD.Print("chuj");
 		var table = new Board();
 		table.Name = "tableNode";
-		//table.tychNieCzysc.Add("chuj");
 		AddChild(table);
 		//table.dodajDomek(2, 1);
 		//table.dodajDomek(2, 2);
@@ -68,7 +66,7 @@ public partial class Main : Node2D
 	}
 	
 	public void wypisz(){
-		GD.Print("chuj");
+		GD.Print("tekst");
 	}
 	
 	public void zmianaTury(){

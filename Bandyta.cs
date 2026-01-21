@@ -47,10 +47,7 @@ public partial class Bandyta : PustePole
 				}
 			}
 			
-			//foreach(var chuj in this.tablicaSciezki)
-			//{
-				//GD.Print("", string.Join(", ", chuj));
-			//}
+		
 			
 			this.pathfinding(this.tablicaSciezki);
 			
@@ -201,10 +198,6 @@ public partial class Bandyta : PustePole
 	}
 	
 	public void malyPathfinding(dynamic obszar, int pole_i, int pole_y, int licznik){
-		//foreach(var chuj in obszar)
-		//{
-			//GD.Print("", string.Join(", ", chuj));
-		//}
 		if (obszar.Length > pole_i+1 && obszar[0].Length > pole_y+1 && pole_i > 0 && pole_y >0){
 			if (obszar[pole_i+1][pole_y] == 0 || (obszar[pole_i+1][pole_y] > licznik && obszar[pole_i+1][pole_y] < 3000)){
 			obszar[pole_i+1][pole_y] = licznik;
@@ -286,10 +279,6 @@ public partial class Bandyta : PustePole
 			}
 		}
 		
-		//foreach(var chuj in obszar)
-		//{
-			//GD.Print("", string.Join(", ", chuj));
-		//}
 		
 		return obszar;
 	}
@@ -328,7 +317,7 @@ public partial class Bandyta : PustePole
 				this.Position = cel.Position;
 				cel.Position = tempPosition;
 					
-				cel.Name = "chuj";
+				cel.Name = "sfsdf";
 				this.Name = tempName2;
 				cel.Name = tempName;
 				//GD.Print(this.Name);
@@ -368,7 +357,6 @@ public partial class Bandyta : PustePole
 	}
 	
 	public void _on_area_2d_mouse_exited(){
-		//GD.Print("chuj", sekwencja[0]);
 		var sprite = GetNode<Sprite2D>("Sprite2D");
 		this.sekwencja.Clear();
 	}

@@ -201,7 +201,7 @@ public partial class Board : Node2D
 		
 		
 		
-		var domek1 = GD.Load<PackedScene>("res://Bandyta.tscn");
+		var domek1 = GD.Load<PackedScene>("res://bandyta.tscn");
 		var domeczek = domek1.Instantiate<Bandyta>();
 		//GD.Print("pole"+temp1+temp2);
 		domeczek.Name = "pole"+temp1+temp2;
